@@ -13,6 +13,9 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtQml/QQmlEngine>
+#include <QtWidgets/QFileDialog>
+#include <QtCore/QStandardPaths>
+#include <QtCore/QDebug>
 
 class QtQuick2ApplicationViewerPrivate
 {
@@ -43,7 +46,13 @@ QtQuick2ApplicationViewer::QtQuick2ApplicationViewer(QWindow *parent)
     , d(new QtQuick2ApplicationViewerPrivate())
 {
     connect(engine(), SIGNAL(quit()), SLOT(close()));
-    setResizeMode(QQuickView::SizeRootObjectToView);
+    setFlags( flags() |
+              Qt::WindowTitleHint |
+              Qt::WindowSystemMenuHint |
+              Qt::WindowMinimizeButtonHint |
+              Qt::WindowMaximizeButtonHint |
+              Qt::WindowCloseButtonHint |
+              Qt::WindowFullscreenButtonHint);
 
 #ifdef Q_OS_ANDROID
     engine()->setBaseUrl(QUrl::fromLocalFile("/"));
@@ -73,4 +82,26 @@ void QtQuick2ApplicationViewer::showExpanded()
 #else
     show();
 #endif
+}
+
+void QtQuick2ApplicationViewer::suggestResize(const QSize &size)
+{
+    if (size.isValid() && windowState() != Qt::WindowFullScreen)
+        this->resize(size);
+}
+
+void QtQuick2ApplicationViewer::toggleFullscreen()
+{
+    if (windowState() == Qt::WindowFullScreen) {
+        qDebug("toggleFullscreen normal");
+        showNormal();
+    } else {
+        qDebug("toggleFullscreen fullscreen");
+        showFullScreen();
+    }
+}
+
+QString QtQuick2ApplicationViewer::openFileDialog()
+{
+    return QFileDialog::getOpenFileName(0, "Video File", QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).first(), "");
 }

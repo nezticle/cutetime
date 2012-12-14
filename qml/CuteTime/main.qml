@@ -58,6 +58,10 @@ Rectangle {
     Content {
         id: content
         anchors.fill: root
+
+        onContentSizeChanged: {
+            viewer.suggestResize(contentSize);
+        }
     }
 
     MouseArea {
@@ -69,15 +73,11 @@ Rectangle {
             controlBar.show();
             controlBarTimer.restart();
         }
-        onExited: {
-            controlBar.hide()
-            controlBarTimer.stop();
-        }
     }
 
     Timer {
         id: controlBarTimer
-        interval: 5000;
+        interval: 2000;
         running: false;
 
         onTriggered: {
@@ -90,14 +90,10 @@ Rectangle {
         anchors.horizontalCenter: root.horizontalCenter
         anchors.bottom: root.bottom
         anchors.bottomMargin: 50
-        mediaPlayer: content.videoPlayer
+        mediaPlayer: content.videoPlayer.mediaPlayer
 
         onOpenFile: {
             root.openVideo();
-        }
-
-        onOpenCamera: {
-            root.openCamera();
         }
 
         onOpenURL: {
@@ -109,7 +105,7 @@ Rectangle {
         }
 
         onToggleFullScreen: {
-            viewer.showFullScreen();
+            viewer.toggleFullscreen();
         }
     }
 
@@ -148,30 +144,24 @@ Rectangle {
     //        gripSize: d.gripSize
     //    }
 
-    //    EffectSelectionPanel {
-    //        id: effectSelectionPanel
-    //        anchors {
-    //            top: parent.top
-    //            bottom: fileOpen.top
-    //            right: parent.right
-    //            margins: 5
-    //        }
-    //        width: 300
-    //        itemHeight: 40
-    //        onEffectSourceChanged: {
-    //            content.effectSource = effectSource
-    //            parameterPanel.model = content.effect.parameters
-    //        }
-    //    }
-
-    FileBrowser {
-        id: videoFileBrowser
-        anchors.fill: root
-        Component.onCompleted: fileSelected.connect(content.openVideo)
+    EffectSelectionPanel {
+        id: effectSelectionPanel
+        visible: false;
+        anchors {
+            bottom: controlBar.top
+            right: controlBar.right
+            margins: 5
+        }
+        width: 150
+        height: 150
+        itemHeight: 40
+        onEffectSourceChanged: {
+            content.effectSource = effectSource
+            //parameterPanel.model = content.effect.parameters
+        }
     }
 
     function init() {
-        console.log("[qmlvideofx] main.init")
         videoFileBrowser.folder = videoPath
         content.init()
         if (fileName != "")
@@ -179,25 +169,24 @@ Rectangle {
     }
 
     function openVideo() {
-        console.debug("opening video dialog");
-        videoFileBrowser.show()
+        //videoFileBrowser.show()
+        var videoFile = viewer.openFileDialog();
+        if (videoFile != "")
+            content.openVideo(videoFile);
     }
 
     function openCamera() {
-        console.debug("opening camera");
         content.openCamera()
     }
 
     function openURL() {
-        console.debug("opening URL dialog");
-        urlBar.visible = true;
+        urlBar.visible = !urlBar.visible
     }
 
     function openFX() {
-        console.debug("opening FX dialog");
+        effectSelectionPanel.visible = !effectSelectionPanel.visible;
     }
 
     function close() {
-        content.openImage("images/qt-logo.png")
     }
 }

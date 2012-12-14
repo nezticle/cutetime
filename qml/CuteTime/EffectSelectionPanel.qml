@@ -54,28 +54,27 @@ Rectangle {
 
     ListModel {
         id: sources
-        ListElement { name: "No effect"; source: "EffectPassThrough.qml" }
-        ListElement { name: "Billboard"; source: "EffectBillboard.qml" }
-        ListElement { name: "Black & white"; source: "EffectBlackAndWhite.qml" }
-        ListElement { name: "Blur"; source: "EffectGaussianBlur.qml" }
-        ListElement { name: "Edge detection"; source: "EffectSobelEdgeDetection1.qml" }
-        //ListElement { name: "Edge detection (Sobel, #2)"; source: "EffectSobelEdgeDetection2.qml" }
-        ListElement { name: "Emboss"; source: "EffectEmboss.qml" }
-        ListElement { name: "Glow"; source: "EffectGlow.qml" }
-        ListElement { name: "Isolate"; source: "EffectIsolate.qml" }
-        ListElement { name: "Magnify"; source: "EffectMagnify.qml" }
-        ListElement { name: "Page curl"; source: "EffectPageCurl.qml" }
-        ListElement { name: "Pixelate"; source: "EffectPixelate.qml" }
-        ListElement { name: "Posterize"; source: "EffectPosterize.qml" }
-        ListElement { name: "Ripple"; source: "EffectRipple.qml" }
-        ListElement { name: "Sepia"; source: "EffectSepia.qml" }
-        ListElement { name: "Sharpen"; source: "EffectSharpen.qml" }
-        ListElement { name: "Shockwave"; source: "EffectShockwave.qml" }
-        ListElement { name: "Tilt shift"; source: "EffectTiltShift.qml" }
-        ListElement { name: "Toon"; source: "EffectToon.qml" }
-        ListElement { name: "Warhol"; source: "EffectWarhol.qml" }
-        ListElement { name: "Wobble"; source: "EffectWobble.qml" }
-        ListElement { name: "Vignette"; source: "EffectVignette.qml" }
+        ListElement { name: "No effect"; source: "Effects/EffectPassThrough.qml" }
+        ListElement { name: "Billboard"; source: "Effects/EffectBillboard.qml" }
+        ListElement { name: "Black & white"; source: "Effects/EffectBlackAndWhite.qml" }
+        ListElement { name: "Blur"; source: "Effects/EffectGaussianBlur.qml" }
+        ListElement { name: "Edge detection"; source: "Effects/EffectSobelEdgeDetection1.qml" }
+        ListElement { name: "Emboss"; source: "Effects/EffectEmboss.qml" }
+        ListElement { name: "Glow"; source: "Effects/EffectGlow.qml" }
+        ListElement { name: "Isolate"; source: "Effects/EffectIsolate.qml" }
+        ListElement { name: "Magnify"; source: "Effects/EffectMagnify.qml" }
+        ListElement { name: "Page curl"; source: "Effects/EffectPageCurl.qml" }
+        ListElement { name: "Pixelate"; source: "Effects/EffectPixelate.qml" }
+        ListElement { name: "Posterize"; source: "Effects/EffectPosterize.qml" }
+        ListElement { name: "Ripple"; source: "Effects/EffectRipple.qml" }
+        ListElement { name: "Sepia"; source: "Effects/EffectSepia.qml" }
+        ListElement { name: "Sharpen"; source: "Effects/EffectSharpen.qml" }
+        ListElement { name: "Shockwave"; source: "Effects/EffectShockwave.qml" }
+        ListElement { name: "Tilt shift"; source: "Effects/EffectTiltShift.qml" }
+        ListElement { name: "Toon"; source: "Effects/EffectToon.qml" }
+        ListElement { name: "Warhol"; source: "Effects/EffectWarhol.qml" }
+        ListElement { name: "Wobble"; source: "Effects/EffectWobble.qml" }
+        ListElement { name: "Vignette"; source: "Effects/EffectVignette.qml" }
     }
 
     Component {

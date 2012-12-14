@@ -1,4 +1,4 @@
-#include <QtGui/QGuiApplication>
+#include <QtWidgets/QApplication>
 #include <QtCore/QDebug>
 #include <QtQml/QQmlContext>
 #include <QtQuick/QQuickItem>
@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     QUrl fileName;
     qreal volume = 0.5;
@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 
     QtQuick2ApplicationViewer viewer;
     viewer.setMainQmlFile(QStringLiteral("qml/CuteTime/main.qml"));
+    viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     QQuickItem *rootObject = viewer.rootObject();
     rootObject->setProperty("fileName", fileName);
     rootObject->setProperty("volume", volume);
@@ -48,14 +49,13 @@ int main(int argc, char *argv[])
     if (!picturesLocation.isEmpty())
         imagePath = picturesLocation.first();
     viewer.rootContext()->setContextProperty("imagePath", imagePath);
-    qDebug() << "Image path: " << imagePath;
 
     QString videoPath;
     const QStringList moviesLocation = QStandardPaths::standardLocations(QStandardPaths::MoviesLocation);
     if (!moviesLocation.isEmpty())
         videoPath = moviesLocation.first();
     viewer.rootContext()->setContextProperty("videoPath", videoPath);
-    qDebug() << "Video path: " << videoPath;
+    viewer.rootContext()->setContextProperty("viewer", &viewer);
 
     viewer.setTitle("CuteTime");
 

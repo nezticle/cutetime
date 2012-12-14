@@ -1,14 +1,13 @@
 
 import QtQuick 2.0
+import QtMultimedia 5.0
 
 Image {
     id: controlBar
-    width: 442
-    height: 69
-    source: "images/toolbar.png"
-    opacity: 0.95
+    source: "images/ControlBar.png"
 
     property QtObject mediaPlayer: null;
+    property bool isMouseAbove: false;
 
     signal openFile();
     signal openCamera();
@@ -16,15 +15,23 @@ Image {
     signal openFX();
     signal toggleFullScreen();
 
-    state: "HIDDEN"
+    state: "VISIBLE"
+
+    MouseArea {
+        anchors.fill: controlBar
+        hoverEnabled: true
+
+        onEntered: controlBar.isMouseAbove = true;
+        onExited: controlBar.isMouseAbove = false;
+    }
 
     VolumeControl {
         id: volumeControl
         anchors.verticalCenter: playbackControl.verticalCenter
+        anchors.left: controlBar.left
+        anchors.leftMargin: 25
 
         onVolumeChanged: {
-            //Try to update volume on content item
-            console.debug("volume = " + volumeControl.volume);
         }
     }
 
@@ -43,42 +50,28 @@ Image {
                 if (playbackRate === 1.0)
                     mediaPlayer.play();
         }
+
+
     }
 
     //Toolbar Controls
     Row {
         id: toolbarMenuButtons
-        anchors.right: controlBar.right
-        anchors.top: controlBar.top
-        anchors.topMargin: 10;
-        anchors.rightMargin: 10;
-
-        spacing: 0;
-
+        anchors.left: playbackControl.right
+        anchors.leftMargin: 30
+        anchors.verticalCenter: playbackControl.verticalCenter
+        spacing: 4;
 
         ImageButton {
             id: fxButton
             imageSource: "images/fxbutton.png"
-            width: 30
-            height: 30
             onClicked: {
                 openFX();
             }
         }
-//        ImageButton {
-//            id: cameraButton
-//            imageSource: "images/camerabutton.png"
-//            width: 30
-//            height: 30
-//            onClicked: {
-//                openCamera();
-//            }
-//        }
         ImageButton {
             id: fileButton
             imageSource: "images/filebutton.png"
-            width: 30
-            height: 30
             onClicked: {
                 openFile();
             }
@@ -86,49 +79,69 @@ Image {
         ImageButton {
             id: urlButton
             imageSource: "images/urlbutton.png"
-            width: 30
-            height: 30
             onClicked: {
                 openURL();
             }
         }
     }
 
-    //Seek controls
-
-
-    //Fullscreen button
     ImageButton {
         id: fullscreenButton
         imageSource: "images/fullscreenbutton.png"
-        width: 21
-        height: 22
-        anchors.margins: 7
-        anchors.bottom: controlBar.bottom
-        anchors.right: controlBar.right
         onClicked: {
             //Toggle fullscreen
             toggleFullScreen();
         }
+        anchors.right: controlBar.right
+        anchors.top: controlBar.top
+        anchors.rightMargin: 15
+        anchors.topMargin: 15
+
+    }
+
+    //Seek controls
+    SeekControl {
+        id: seekControl
+        anchors.top: playbackControl.bottom
+        anchors.topMargin: 13
+        anchors.right: controlBar.right
+        anchors.left: controlBar.left
+        anchors.rightMargin: 15
+        anchors.leftMargin: 15
+
+        position: mediaPlayer.position;
+        duration: mediaPlayer.duration;
+        seekable: mediaPlayer.seekable;
     }
 
     function hide() {
-        controlBar.state = "HIDDEN";
+        if(mediaPlayer.playbackRate !== 0 && !isMouseAbove)
+            controlBar.state = "HIDDEN";
     }
 
     function show() {
         controlBar.state = "VISIBLE";
     }
 
-    Binding {
-         target: mediaPlayer; property: 'volume'
-         value: volumeControl.volume; when: mediaPlayer !== null
-     }
+    Connections {
+        target: mediaPlayer
+        onStatusChanged: {
+            if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered))
+                playbackControl.playbackEnabled = true;
+            else
+                playbackControl.playbackEnabled = false;
+        }
+    }
 
     Binding {
-         target: mediaPlayer; property: 'playbackRate'
-         value: playbackControl.playbackRate; when: mediaPlayer !== null
-     }
+        target: mediaPlayer; property: 'volume'
+        value: volumeControl.volume; when: mediaPlayer !== null
+    }
+
+    Binding {
+        target: mediaPlayer; property: 'playbackRate'
+        value: playbackControl.playbackRate; when: mediaPlayer !== null
+    }
 
     states: [
         State {

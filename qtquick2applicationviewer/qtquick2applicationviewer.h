@@ -26,6 +26,11 @@ public:
 
     void showExpanded();
 
+public slots:
+    void suggestResize(const QSize &size);
+    void toggleFullscreen();
+    QString openFileDialog();
+
 private:
     class QtQuick2ApplicationViewerPrivate *d;
 };

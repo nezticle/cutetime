@@ -9,9 +9,11 @@ Item {
 
     signal clicked
 
+    width: image.width
+    height: image.height
+
     Image {
         id: image
-        anchors.fill: root
     }
 
     MouseArea {

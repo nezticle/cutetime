@@ -43,20 +43,18 @@ import QtQuick 2.0
 import QtMultimedia 5.0
 
 VideoOutput {
+    id: videoOutput
     source: mediaPlayer
+    fillMode: VideoOutput.PreserveAspectFit;
     property alias mediaSource: mediaPlayer.source
     property alias volume: mediaPlayer.volume
     property alias rate: mediaPlayer.playbackRate
-    property alias videoPlayer: mediaPlayer
-    property size  nativeSize
-
-    onSourceRectChanged: {
-        nativeSize = Qt.size(sourceRect.width, sourceRect.height);
-    }
+    property alias mediaPlayer: mediaPlayer
 
     MediaPlayer {
         id: mediaPlayer
-        autoPlay: false
+        autoPlay: true
+        autoLoad: true
         volume: 0.5
 
         onPlaybackStateChanged: {
@@ -73,6 +71,11 @@ VideoOutput {
 
         onStatusChanged: {
             console.debug("status = " + mediaPlayer.status);
+            if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered)) {
+                //now that media is loaded, we should know its size, and should request a resize
+                //if we are not fullscreen, then the window should resize to the native size of the video
+                //TODO: automatically resize video window to native move size
+            }
         }
 
         onBufferProgressChanged: {

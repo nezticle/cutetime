@@ -3,8 +3,8 @@ import QtQuick 2.0
 
 Item {
     id: root
-    width: 150
-    height: 30
+    width: 100
+    height: volumeUp.height
 
     property alias volume: volumeSlider.value
 
@@ -12,33 +12,30 @@ Item {
     ImageButton {
         id: volumeDown
         imageSource: "images/volumedown.png"
-        width: 19
-        height: 20
         anchors.verticalCenter: root.verticalCenter
-        anchors.right: volumeSlider.left
-        anchors.rightMargin: 5
+        anchors.left: root.left
         onClicked: {
             root.volume = 0.0;
         }
     }
     VolumeSlider {
         id: volumeSlider
-        height: 12
-        width: 80
+        anchors.left: volumeDown.right
+        anchors.leftMargin: 3
+        anchors.rightMargin: 5
+        anchors.right: volumeUp.left
         maximum: 1.0
         minimum: 0.0
-        anchors.centerIn: root
-
+        anchors.verticalCenter: root.verticalCenter
+        anchors.verticalCenterOffset: 1
     }
 
     ImageButton {
         id: volumeUp
         imageSource: "images/volumeup.png"
-        width: 25
-        height: 25
         anchors.verticalCenter: root.verticalCenter
-        anchors.left: volumeSlider.right
-        anchors.leftMargin: 5
+        anchors.verticalCenterOffset: 1
+        anchors.right: root.right
         onClicked: {
             root.volume = 1.0
         }

@@ -45,16 +45,11 @@ Rectangle {
     id: root
     color: "black"
     property alias effect: effectLoader.item
-    property alias gripSize: divider.gripSize
     property string effectSource
-    property alias videoPlayer: videoContent.videoPlayer
+    property alias videoPlayer: videoContent
 
-    Divider {
-        id: divider
-        visible: false
-        z: 1.0
-        onValueChanged: updateDivider()
-    }
+    signal contentSizeChanged(size contentSize)
+
 
     ShaderEffectSource {
         id: theSource
@@ -64,18 +59,11 @@ Rectangle {
 
     ContentVideo {
         id: videoContent
-        visible: mediaSource == undefined ? false : true
         anchors.fill: root
-    }
+        visible: mediaSource == undefined ? false : true
 
-    Rectangle {
-        id: logoImage
-        color: "black"
-        anchors.fill: root;
-        Image {
-            visible: videoContent.videoPlayer.state !== Qt.StoppedState ? false : true
-            anchors.centerIn: parent
-            source: "images/qt-logo.png"
+        onSourceRectChanged: {
+            contentSizeChanged(Qt.size(sourceRect.width, sourceRect.height));
         }
     }
 
@@ -102,8 +90,8 @@ Rectangle {
         effectLoader.item.targetHeight = root.height
         updateSource()
         effectLoader.item.source = theSource
-        divider.visible = effectLoader.item.divider
-        updateDivider()
+        //divider.visible = effectLoader.item.divider
+        //updateDivider()
     }
 
     function init() {
@@ -112,17 +100,11 @@ Rectangle {
         root.effectSource = "EffectPassThrough.qml"
     }
 
-    function updateDivider() {
-        if (effectLoader.item && effectLoader.item.divider)
-            effectLoader.item.dividerValue = divider.value
-    }
-
     function updateSource() {
         console.log("[qmlvideofx] Content.updateSource")
             theSource.sourceItem = videoContent
             if (effectLoader.item)
                 effectLoader.item.anchors.fill = videoContent
-//        }
     }
 
     function openVideo(path) {
