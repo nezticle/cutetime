@@ -40,12 +40,19 @@
 ****************************************************************************/
 import QtQuick 2.0
 
-Rectangle {
+Item {
     id: root
     property int itemHeight: 25
     property string effectSource: ""
 
     signal clicked
+
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.5
+        radius: 10
+    }
 
     QtObject {
         id: d

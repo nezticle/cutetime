@@ -11,7 +11,7 @@ Item {
     property int xMax: width - handle.width
     onXMaxChanged: updatePos();
     onMinimumChanged: updatePos();
-    property bool mutable: false
+    property bool mutable: true
 
     signal valueChangedByHandle(int newValue)
 

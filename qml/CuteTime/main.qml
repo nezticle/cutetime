@@ -130,16 +130,17 @@ Rectangle {
         }
     }
 
-    //    ParameterPanel {
-    //        id: parameterPanel
-    //        anchors {
-    //            left: parent.left
-    //            bottom: parent.bottom
-    //            right: effectSelectionPanel.left
-    //            margins: 20
-    //        }
-    //        gripSize: d.gripSize
-    //    }
+    ParameterPanel {
+        id: parameterPanel
+        visible: effectSelectionPanel.visible
+        height: effectSelectionPanel.height
+        anchors {
+            left: controlBar.left
+            bottom: controlBar.top
+            right: effectSelectionPanel.left
+            margins: 5
+        }
+    }
 
     EffectSelectionPanel {
         id: effectSelectionPanel
@@ -154,7 +155,7 @@ Rectangle {
         itemHeight: 40
         onEffectSourceChanged: {
             content.effectSource = effectSource
-            //parameterPanel.model = content.effect.parameters
+            parameterPanel.model = content.effect.parameters
         }
     }
 
