@@ -50,6 +50,10 @@ Rectangle {
     property bool perfMonitorsLogging: false
     property bool perfMonitorsVisible: false
 
+    Component.onCompleted: {
+        init();
+    }
+
     QtObject {
         id: d
         property real gripSize: 20
@@ -162,7 +166,6 @@ Rectangle {
     }
 
     function init() {
-        videoFileBrowser.folder = videoPath
         content.init()
         if (fileName != "")
             content.openVideo(fileName)

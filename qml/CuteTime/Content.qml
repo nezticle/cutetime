@@ -90,33 +90,27 @@ Rectangle {
         effectLoader.item.targetHeight = root.height
         updateSource()
         effectLoader.item.source = theSource
-        //divider.visible = effectLoader.item.divider
-        //updateDivider()
     }
 
     function init() {
-        console.log("[qmlvideofx] Content.init")
-        theSource.sourceItem = logoImage;
-        root.effectSource = "EffectPassThrough.qml"
+        //theSource.sourceItem = logoImage;
+        root.effectSource = "Effects/EffectPassThrough.qml"
     }
 
     function updateSource() {
-        console.log("[qmlvideofx] Content.updateSource")
             theSource.sourceItem = videoContent
             if (effectLoader.item)
                 effectLoader.item.anchors.fill = videoContent
     }
 
     function openVideo(path) {
-        console.log("[qmlvideofx] Content.openVideo \"" + path + "\"")
-        //stop();
+        stop();
         videoContent.mediaSource = path;
         updateSource();
     }
 
     function stop() {
-        console.log("[qmlvideofx] Content.stop")
-        theSource.sourceItem = logoImage
+        //theSource.sourceItem = logoImage
         if (videoContent.mediaSource !== undefined) {
             videoContent.stop();
         }

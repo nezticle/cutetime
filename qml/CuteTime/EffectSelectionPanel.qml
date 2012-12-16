@@ -62,7 +62,7 @@ Rectangle {
         ListElement { name: "Emboss"; source: "Effects/EffectEmboss.qml" }
         ListElement { name: "Glow"; source: "Effects/EffectGlow.qml" }
         ListElement { name: "Isolate"; source: "Effects/EffectIsolate.qml" }
-        ListElement { name: "Magnify"; source: "Effects/EffectMagnify.qml" }
+        //ListElement { name: "Magnify"; source: "Effects/EffectMagnify.qml" }
         ListElement { name: "Page curl"; source: "Effects/EffectPageCurl.qml" }
         ListElement { name: "Pixelate"; source: "Effects/EffectPixelate.qml" }
         ListElement { name: "Posterize"; source: "Effects/EffectPosterize.qml" }
