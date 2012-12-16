@@ -83,7 +83,6 @@ Rectangle {
     }
 
     onEffectSourceChanged: {
-        console.log("[qmlvideofx] Content.onEffectSourceChanged " + effectSource)
         effectLoader.source = effectSource
         effectLoader.item.parent = root
         effectLoader.item.targetWidth = root.width

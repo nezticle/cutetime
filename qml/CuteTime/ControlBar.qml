@@ -17,6 +17,12 @@ Image {
 
     state: "VISIBLE"
 
+    onMediaPlayerChanged: {
+        if (mediaPlayer === null)
+            return;
+        volumeControl.volume = mediaPlayer.volume;
+    }
+
     MouseArea {
         anchors.fill: controlBar
         hoverEnabled: true
@@ -49,9 +55,9 @@ Image {
             if (mediaPlayer !== null)
                 if (playbackRate === 1.0)
                     mediaPlayer.play();
+                else if (playbackRate === 0.0)
+                    mediaPlayer.pause();
         }
-
-
     }
 
     //Toolbar Controls
@@ -109,9 +115,20 @@ Image {
         anchors.rightMargin: 15
         anchors.leftMargin: 15
 
-        position: mediaPlayer.position;
         duration: mediaPlayer.duration;
         seekable: mediaPlayer.seekable;
+
+        onSeekValueChanged: {
+            mediaPlayer.seek(newPosition);
+            position = mediaPlayer.position;
+        }
+    }
+
+    Connections {
+        target: mediaPlayer
+        onPositionChanged: {
+            seekControl.position = mediaPlayer.position;
+        }
     }
 
     function hide() {

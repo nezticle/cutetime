@@ -86,8 +86,11 @@ void QtQuick2ApplicationViewer::showExpanded()
 
 void QtQuick2ApplicationViewer::suggestResize(const QSize &size)
 {
-    if (size.isValid() && windowState() != Qt::WindowFullScreen)
-        this->resize(size);
+    if (size.isValid()) {
+        if (windowState() == Qt::WindowFullScreen)
+            toggleFullscreen();
+        resize(size);
+    }
 }
 
 void QtQuick2ApplicationViewer::toggleFullscreen()
@@ -103,5 +106,8 @@ void QtQuick2ApplicationViewer::toggleFullscreen()
 
 QString QtQuick2ApplicationViewer::openFileDialog()
 {
+    if (windowState() == Qt::WindowFullScreen)
+        toggleFullscreen();
+
     return QFileDialog::getOpenFileName(0, "Video File", QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).first(), "");
 }

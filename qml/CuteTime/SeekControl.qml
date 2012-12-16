@@ -8,8 +8,11 @@ Item {
     property int duration: 0;
     property bool seekable: false;
 
+    signal seekValueChanged(int newPosition);
+
     onPositionChanged: {
         elapsedText.text = formatTime(position);
+        seekSlider.value = position;
     }
 
     onDurationChanged: {
@@ -35,7 +38,10 @@ Item {
 
         minimum: 0.0
         maximum: root.duration !== 0 ? root.duration : 1;
-        value: root.position !== 0 ? root.position : 1;
+
+        onValueChangedByHandle: {
+            seekValueChanged(newValue);
+        }
     }
 
     Text {

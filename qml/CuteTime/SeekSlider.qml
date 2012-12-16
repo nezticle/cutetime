@@ -13,6 +13,8 @@ Item {
     onMinimumChanged: updatePos();
     property bool mutable: false
 
+    signal valueChangedByHandle(int newValue)
+
     function updatePos() {
         if (maximum > minimum) {
             var pos = 0 + (value - minimum) * slider.xMax / (maximum - minimum);
@@ -30,6 +32,25 @@ Item {
         width: slider.width
         border.left: 6;
         border.right: 6;
+
+        MouseArea {
+            id: backgroundMouse
+            anchors.fill: parent
+            enabled: slider.mutable
+            drag.target: handle
+            drag.axis: Drag.XAxis;
+            drag.minimumX: 0
+            drag.maximumX: slider.xMax
+            onPressed: {
+                value = (maximum - minimum) * (handle.x) / slider.xMax + minimum;
+                valueChangedByHandle(value);
+            }
+            onPositionChanged: {
+                value = (maximum - minimum) * mouseX / slider.xMax + minimum;
+                valueChangedByHandle(value);
+            }
+        }
+
     }
 
     BorderImage {
@@ -58,6 +79,7 @@ Item {
             drag.maximumX: slider.xMax
             onPositionChanged: {
                 value = (maximum - minimum) * (handle.x) / slider.xMax + minimum;
+                valueChangedByHandle(value);
             }
         }
     }

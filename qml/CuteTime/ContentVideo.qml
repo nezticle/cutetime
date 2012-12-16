@@ -53,9 +53,13 @@ VideoOutput {
 
     MediaPlayer {
         id: mediaPlayer
-        autoPlay: true
         autoLoad: true
+        autoPlay: false
         volume: 0.5
+
+        onPlaybackRateChanged: {
+            console.debug("playbackRate: " + playbackRate);
+        }
 
         onPlaybackStateChanged: {
             console.debug("playbackState = " + mediaPlayer.playbackState);
