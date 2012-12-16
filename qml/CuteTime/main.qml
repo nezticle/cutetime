@@ -81,7 +81,7 @@ Rectangle {
 
     Timer {
         id: controlBarTimer
-        interval: 2000;
+        interval: 1000;
         running: false;
 
         onTriggered: {

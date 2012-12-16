@@ -1,5 +1,7 @@
 - When application opens and no video has been started, there is just a black screen.  Some kind of visual should be there instead
+    -placeholder has been added until we come up with something good.
 - Make the Control Bar movable via dragging.
+    -this depends on the behavior of the FX dialog
 - Add shader effect paramater pannel next to FX selection list
 - Add graphics for FX selection
 - Fix the File dialog to be asyncronous for stability on all platforms

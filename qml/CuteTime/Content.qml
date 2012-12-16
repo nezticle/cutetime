@@ -57,13 +57,23 @@ Rectangle {
         hideSource: true
     }
 
+    Intro {
+        id: introBackground
+        anchors.fill: root
+        visible: videoContent.mediaSource == "" ? true : false
+    }
+
     ContentVideo {
         id: videoContent
         anchors.fill: root
-        visible: mediaSource == undefined ? false : true
+        visible: mediaSource == "" ? false : true
 
         onSourceRectChanged: {
             contentSizeChanged(Qt.size(sourceRect.width, sourceRect.height));
+        }
+
+        Component.onCompleted: {
+            console.log("mediaSource: " + mediaSource);
         }
     }
 
@@ -92,14 +102,15 @@ Rectangle {
     }
 
     function init() {
-        //theSource.sourceItem = logoImage;
+        theSource.sourceItem = introBackground
         root.effectSource = "Effects/EffectPassThrough.qml"
     }
 
     function updateSource() {
-            theSource.sourceItem = videoContent
-            if (effectLoader.item)
-                effectLoader.item.anchors.fill = videoContent
+
+        theSource.sourceItem = videoContent.mediaSource == "" ? introBackground : videoContent
+        if (effectLoader.item)
+            effectLoader.item.anchors.fill = videoContent
     }
 
     function openVideo(path) {
@@ -109,7 +120,7 @@ Rectangle {
     }
 
     function stop() {
-        //theSource.sourceItem = logoImage
+        theSource.sourceItem = introBackground
         if (videoContent.mediaSource !== undefined) {
             videoContent.stop();
         }
