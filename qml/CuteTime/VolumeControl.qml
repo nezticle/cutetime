@@ -11,7 +11,7 @@ Item {
     //Volume Controls
     ImageButton {
         id: volumeDown
-        imageSource: "images/volumedown.png"
+        imageSource: "images/VolumeDown.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.left: root.left
         onClicked: {
@@ -32,7 +32,7 @@ Item {
 
     ImageButton {
         id: volumeUp
-        imageSource: "images/volumeup.png"
+        imageSource: "images/VolumeUp.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.verticalCenterOffset: 1
         anchors.right: root.right

@@ -64,21 +64,21 @@ Image {
 
         ImageButton {
             id: fxButton
-            imageSource: "images/fxbutton.png"
+            imageSource: "images/FXButton.png"
             onClicked: {
                 openFX();
             }
         }
         ImageButton {
             id: fileButton
-            imageSource: "images/filebutton.png"
+            imageSource: "images/FileButton.png"
             onClicked: {
                 openFile();
             }
         }
         ImageButton {
             id: urlButton
-            imageSource: "images/urlbutton.png"
+            imageSource: "images/UrlButton.png"
             onClicked: {
                 openURL();
             }
@@ -87,7 +87,7 @@ Image {
 
     ImageButton {
         id: fullscreenButton
-        imageSource: "images/fullscreenbutton.png"
+        imageSource: "images/FullscreenButton.png"
         onClicked: {
             //Toggle fullscreen
             toggleFullScreen();

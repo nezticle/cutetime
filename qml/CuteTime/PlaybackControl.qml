@@ -12,7 +12,7 @@ Item {
     //Playback Controls
     ImageButton {
         id: rateReverseButton
-        imageSource: "images/ratebuttonreverse.png"
+        imageSource: "images/RateButtonReverse.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.left: root.left;
         onClicked: {
@@ -26,7 +26,7 @@ Item {
     }
     ImageButton {
         id: playButton
-        imageSource: playbackRate != 1.0 ? "images/playbutton.png" : "images/pausebutton.png"
+        imageSource: playbackRate != 1.0 ? "images/PlayButton.png" : "images/PauseButton.png"
         anchors.centerIn: root
         anchors.horizontalCenterOffset: 2
         onClicked: {
@@ -40,7 +40,7 @@ Item {
     }
     ImageButton {
         id: rateForwardButton
-        imageSource: "images/ratebuttonforward.png"
+        imageSource: "images/RateButtonForward.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.right: root.right
         onClicked: {
