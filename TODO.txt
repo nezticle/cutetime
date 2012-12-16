@@ -7,3 +7,4 @@
 - GStreamer doesn't report playback rate when first video is started via autoPlay enabled
 - Change color of seek progress to something move obvious (like blue)
 - Merge the two sliders code into one common component
+- Fix URL entry behavior to look nice
