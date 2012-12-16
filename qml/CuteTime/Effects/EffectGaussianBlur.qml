@@ -46,7 +46,7 @@ import QtQuick 2.0
 Item {
     id: root
     property bool divider: true
-    property real dividerValue: 0.5
+    property real dividerValue: 1
     property ListModel parameters: ListModel {
         ListElement {
             name: "radius"
