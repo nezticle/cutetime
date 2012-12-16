@@ -10,3 +10,4 @@
 - Change color of seek progress to something move obvious (like blue)
 - Merge the two sliders code into one common component
 - Fix URL entry behavior to look nice
+- Add the Camera button when a camera device is available.

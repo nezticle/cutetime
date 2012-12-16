@@ -113,29 +113,22 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    UrlBar {
         id: urlBar
-        color: "white"
         visible: false
         anchors.top: root.top
-        anchors.horizontalCenter: root.horizontalCenter
-        width: root.width
-        height: 50;
+        anchors.right: root.right
+        anchors.left: root.left
+        anchors.rightMargin: 20
+        anchors.leftMargin: 20
 
-        TextInput {
-            id: urlInput
-            anchors.fill: urlBar
-            anchors.margins: 5
-            color: "black"
-
-            onAccepted: {
-                urlBar.visible = false;
-                if (urlInput.text != "")
-                    content.openVideo(urlInput.text)
-            }
+        onUrlAccepted: {
+            urlBar.visible = false;
+            console.log("urlBar.text == " + text);
+            if (text != "")
+                content.openVideo(text)
         }
     }
-
 
     //    ParameterPanel {
     //        id: parameterPanel
