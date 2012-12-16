@@ -7,7 +7,7 @@ DEPLOYMENTFOLDERS = folder_qml folder_shaders
 QT += widgets
 
 # Additional import path used to resolve QML modules in Creator's code model
-QML_IMPORT_PATH = /Users/nezticle/Code/qt5/qtbase/qml
+QML_IMPORT_PATH = /home/nezticle/Code/qt5/qtbase/qml
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += \
@@ -20,3 +20,7 @@ HEADERS += \
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
+
+OTHER_FILES += \
+    TODO.txt \
+    README.txt

@@ -1,0 +1,11 @@
+- When application opens and no video has been started, there is just a black screen.  Some kind of visual should be there instead
+- Make the Control Bar movable via dragging.
+- Add shader effect paramater pannel next to FX selection list
+- Add graphics for FX selection
+- Fix the File dialog to be asyncronous for stability on all platforms
+- Fix Play/Pause rate inconsitencies between platforms
+- Fix setGeometry when Fullscreen issues.
+- AVFoundation doesn't report video source rect changes correctly on OS X 10.7+
+- When seeking is enabled, allow the seek controls handle to be dragged.
+- Change color of seek progress to something move obvious (like blue)
+- Merge the two sliders code into one common component
