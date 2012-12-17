@@ -54,27 +54,27 @@ VideoOutput {
     MediaPlayer {
         id: mediaPlayer
         autoLoad: true
-        autoPlay: false
+        autoPlay: true
         volume: 0.5
 
         onPlaybackRateChanged: {
-            console.debug("playbackRate: " + playbackRate);
+            //console.debug("playbackRate: " + playbackRate);
         }
 
         onPlaybackStateChanged: {
-            console.debug("playbackState = " + mediaPlayer.playbackState);
+            //console.debug("playbackState = " + mediaPlayer.playbackState);
         }
 
         onAvailabilityChanged: {
-            console.debug("availability = " + mediaPlayer.availability);
+            //console.debug("availability = " + mediaPlayer.availability);
         }
 
         onErrorChanged: {
-            console.debug("error = " + mediaPlayer.error);
+            //console.debug("error = " + mediaPlayer.error);
         }
 
         onStatusChanged: {
-            console.debug("status = " + mediaPlayer.status);
+            //console.debug("status = " + mediaPlayer.status);
             if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered)) {
                 //now that media is loaded, we should know its size, and should request a resize
                 //if we are not fullscreen, then the window should resize to the native size of the video
@@ -83,7 +83,7 @@ VideoOutput {
         }
 
         onBufferProgressChanged: {
-            console.debug("buffer progress = " + mediaPlayer.bufferProgress);
+            //console.debug("buffer progress = " + mediaPlayer.bufferProgress);
         }
     }
     function play() { mediaPlayer.play() }

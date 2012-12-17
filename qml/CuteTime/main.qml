@@ -54,11 +54,6 @@ Rectangle {
         init();
     }
 
-    QtObject {
-        id: d
-        property real gripSize: 20
-    }
-
     Content {
         id: content
         anchors.fill: root
