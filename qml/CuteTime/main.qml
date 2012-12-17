@@ -113,22 +113,6 @@ Rectangle {
         }
     }
 
-    UrlBar {
-        id: urlBar
-        visible: false
-        anchors.top: root.top
-        anchors.right: root.right
-        anchors.left: root.left
-        anchors.rightMargin: 20
-        anchors.leftMargin: 20
-
-        onUrlAccepted: {
-            urlBar.visible = false;
-            if (text != "")
-                content.openVideo(text)
-        }
-    }
-
     ParameterPanel {
         id: parameterPanel
         opacity: controlBar.opacity
@@ -160,6 +144,19 @@ Rectangle {
         }
     }
 
+    UrlBar {
+        id: urlBar
+        opacity: 0
+        visible: opacity != 0
+        anchors.fill: parent
+        onUrlAccepted: {
+            urlBar.opacity = 0;
+            if (text != "")
+                content.openVideo(text)
+        }
+    }
+
+
     function init() {
         content.init()
         if (fileName != "")
@@ -178,7 +175,7 @@ Rectangle {
     }
 
     function openURL() {
-        urlBar.visible = !urlBar.visible
+        urlBar.opacity = urlBar.opacity === 0 ? 1 : 0
     }
 
     function openFX() {
