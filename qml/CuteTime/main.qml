@@ -81,8 +81,8 @@ Rectangle {
 
     Timer {
         id: controlBarTimer
-        interval: 1000;
-        running: false;
+        interval: 1000
+        running: false
 
         onTriggered: {
             controlBar.hide();

@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     id: root
     height: 50
-    signal urlAccepted(string text);
+    signal urlAccepted(string text)
 
     Rectangle {
         id: urlBar

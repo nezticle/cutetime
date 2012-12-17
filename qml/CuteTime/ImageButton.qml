@@ -22,19 +22,6 @@ Item {
         visible: true
     }
 
-//    Glow {
-//        id: glowEffect
-//        cached: false
-//        visible: false
-//        anchors.fill: root
-//        radius: 4
-//        samples: 24
-//        spread: 0
-//        fast: true
-//        color: "white"
-//        source: image
-//    }
-
     ColorOverlay {
         id: glowEffect
         anchors.fill: image
@@ -69,8 +56,8 @@ Item {
                 visible: false
             }
             PropertyChanges {
-                target: image;
-                visible: true;
+                target: image
+                visible: true
             }
         },
         State {

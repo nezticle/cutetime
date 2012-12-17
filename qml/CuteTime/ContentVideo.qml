@@ -45,7 +45,7 @@ import QtMultimedia 5.0
 VideoOutput {
     id: videoOutput
     source: mediaPlayer
-    fillMode: VideoOutput.PreserveAspectFit;
+    fillMode: VideoOutput.PreserveAspectFit
     property alias mediaSource: mediaPlayer.source
     property alias mediaPlayer: mediaPlayer
 

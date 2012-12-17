@@ -11,14 +11,14 @@ BorderImage {
     border.right: 12
     height: 78
 
-    property MediaPlayer mediaPlayer: null;
-    property bool isMouseAbove: false;
+    property MediaPlayer mediaPlayer: null
+    property bool isMouseAbove: false
 
-    signal openFile();
-    signal openCamera();
-    signal openURL();
-    signal openFX();
-    signal toggleFullScreen();
+    signal openFile()
+    signal openCamera()
+    signal openURL()
+    signal openFX()
+    signal toggleFullScreen()
 
     state: "VISIBLE"
 
@@ -133,8 +133,8 @@ BorderImage {
         anchors.rightMargin: 15
         anchors.leftMargin: 15
 
-        duration: mediaPlayer.duration;
-        seekable: mediaPlayer.seekable;
+        duration: mediaPlayer.duration
+        seekable: mediaPlayer.seekable
 
         onSeekValueChanged: {
             mediaPlayer.seek(newPosition);

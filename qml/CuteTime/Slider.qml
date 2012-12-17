@@ -5,12 +5,12 @@ Item {
     height: background.height
     // value is read/write.
     property real value: 1
-    onValueChanged: updatePos();
+    onValueChanged: updatePos()
     property real maximum: 1
     property real minimum: 0
     property int xMax: width - handle.width
-    onXMaxChanged: updatePos();
-    onMinimumChanged: updatePos();
+    onXMaxChanged: updatePos()
+    onMinimumChanged: updatePos()
     property bool mutable: true
 
     signal valueChangedByHandle(int newValue)
@@ -30,15 +30,15 @@ Item {
         id: background
         source: "images/SliderBackground.png"
         width: slider.width
-        border.left: 6;
-        border.right: 6;
+        border.left: 6
+        border.right: 6
 
         MouseArea {
             id: backgroundMouse
             anchors.fill: parent
             enabled: slider.mutable
             drag.target: handle
-            drag.axis: Drag.XAxis;
+            drag.axis: Drag.XAxis
             drag.minimumX: 0
             drag.maximumX: slider.xMax
             onPressed: {
@@ -72,9 +72,9 @@ Item {
         MouseArea {
             id: mouse
             enabled: slider.mutable
-            anchors.fill: parent;
+            anchors.fill: parent
             drag.target: parent
-            drag.axis: Drag.XAxis;
+            drag.axis: Drag.XAxis
             drag.minimumX: 0
             drag.maximumX: slider.xMax
             onPositionChanged: {
