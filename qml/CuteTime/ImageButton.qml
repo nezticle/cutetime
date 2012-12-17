@@ -7,6 +7,8 @@ Item {
 
     property alias enabled: mouseArea.enabled
     property alias imageSource: image.source
+    property bool isToggleable: false
+    property bool isChecked: false
 
     signal clicked
     state: "NORMAL"
@@ -43,12 +45,15 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: root
-        onPressed: {
+        onPressed: {                
             root.state = "HELD"
         }
 
         onReleased: {
-            root.state = "NORMAL"
+            if (isToggleable)
+                isChecked = !isChecked;
+            if (!isChecked || !isToggleable)
+                root.state = "NORMAL"
         }
 
         onClicked: {

@@ -88,6 +88,7 @@ BorderImage {
         ImageButton {
             id: fxButton
             imageSource: "images/FXButton.png"
+            isToggleable: true;
             onClicked: {
                 openFX();
             }
