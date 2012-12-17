@@ -40,20 +40,18 @@
 ****************************************************************************/
 import QtQuick 2.0
 
-Item {
+BorderImage {
     id: root
+    source: "images/ControlBar.png"
+    border.top: 12
+    border.bottom: 12
+    border.left: 12
+    border.right: 12
+    height: 78
     property int itemHeight: 25
     property string effectSource: ""
 
     signal clicked
-
-    Rectangle {
-        anchors.fill: parent
-        color: "black"
-        opacity: 0.5
-        radius: 10
-    }
-
     QtObject {
         id: d
         property Item selectedItem
@@ -91,20 +89,13 @@ Item {
             width: root.width
             height: itemHeight
 
-            Button {
+            Text {
                 id: sourceSelectorItem
                 anchors.centerIn: parent
                 width: 0.9 * parent.width
                 height: 0.8 * itemHeight
                 text: name
-                onClicked: {
-                    if (d.selectedItem)
-                        d.selectedItem.state = "baseState"
-                    d.selectedItem = sourceDelegateItem
-                    d.selectedItem.state = "selected"
-                    effectSource = source
-                    root.clicked()
-                }
+                color: "white"
             }
 
             states: [
@@ -116,13 +107,6 @@ Item {
                     }
                 }
             ]
-
-            Component.onCompleted: {
-                if (name == "No effect") {
-                    state = "selected"
-                    d.selectedItem = sourceDelegateItem
-                }
-            }
 
             transitions: [
                 Transition {
@@ -138,22 +122,32 @@ Item {
         }
     }
 
-    Flickable {
+    ListView {
+        id: list
         anchors.fill: parent
-        contentHeight: (itemHeight * sources.count) + layout.anchors.topMargin + layout.spacing
         clip: true
+        anchors.margins: 14
+        model: sources
+        focus: true
 
-        Column {
-            id: layout
+        onCurrentIndexChanged : {
+            effectSource = model.get(currentIndex).source
+            root.clicked()
+        }
 
-            anchors {
-                fill: parent
-                topMargin: 10
+        delegate: Item {
+            height: 24
+            width: parent.width
+            Rectangle {
+                anchors.fill: parent
+                border.color: index == list.currentIndex ? "#44ffffff" : "transparent"
+                color: index == list.currentIndex ? "#22ffffff" : "transparent"
+                radius: 3
+                Text { color: "white" ; text: name ; anchors.centerIn: parent}
             }
-
-            Repeater {
-                model: sources
-                delegate: sourceDelegate
+            MouseArea {
+                anchors.fill: parent
+                onClicked:  list.currentIndex = index
             }
         }
     }

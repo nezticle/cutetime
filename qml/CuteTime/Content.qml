@@ -41,15 +41,12 @@
 
 import QtQuick 2.0
 
-Rectangle {
+Item {
     id: root
-    color: "black"
     property alias effect: effectLoader.item
     property string effectSource
     property alias videoPlayer: videoContent
-
     signal contentSizeChanged(size contentSize)
-
 
     ShaderEffectSource {
         id: theSource

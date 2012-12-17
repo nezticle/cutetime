@@ -2,9 +2,14 @@
 import QtQuick 2.0
 import QtMultimedia 5.0
 
-Image {
+BorderImage {
     id: controlBar
     source: "images/ControlBar.png"
+    border.top: 12
+    border.bottom: 12
+    border.left: 12
+    border.right: 12
+    height: 78
 
     property MediaPlayer mediaPlayer: null;
     property bool isMouseAbove: false;
@@ -47,7 +52,7 @@ Image {
         id: playbackControl
         anchors.horizontalCenter: controlBar.horizontalCenter
         anchors.top: controlBar.top
-        anchors.topMargin: 10
+        anchors.topMargin: 14
 
         onPlayButtonPressed: {
             if (isPlaying) {

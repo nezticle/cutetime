@@ -50,11 +50,13 @@ Item {
 
     property ListModel model: ListModel { }
 
-    Rectangle {
+    BorderImage {
+        source: "images/ControlBar.png"
         anchors.fill: parent
-        color: "black"
-        opacity: 0.5
-        radius: 10
+        border.top: 12
+        border.bottom: 12
+        border.left: 12
+        border.right: 12
     }
 
     Component {
@@ -75,7 +77,6 @@ Item {
                     bottom: parent.bottom
                     left: parent.left
                 }
-                font.pixelSize: 0.5 * parent.height
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
                 width: 110
@@ -99,6 +100,7 @@ Item {
     ListView {
         id: view
         anchors.fill: parent
+        anchors.margins: 8
         model: root.model
         delegate: editDelegate
         interactive: false

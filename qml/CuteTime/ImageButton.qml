@@ -12,10 +12,11 @@ Item {
     state: "NORMAL"
 
     width: image.width
-    height: image.height
+    height: 24
 
     Image {
         id: image
+        anchors.verticalCenter: parent.verticalCenter
         visible: true
     }
 
