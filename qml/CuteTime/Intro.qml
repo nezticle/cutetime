@@ -16,5 +16,14 @@ Image {
         anchors.verticalCenterOffset: -40
         source: "images/qt-logo.png"
         opacity: 0.5
+
+    }
+    Text {
+        anchors.top: logo.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: "#44ffffff"
+        text: "No file loaded"
+        font.bold: true
+        font.pixelSize: 18
     }
 }
