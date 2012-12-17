@@ -46,7 +46,6 @@ Rectangle {
     width: 640
     height: 480
     color: "black"
-    property string fileName
     property bool perfMonitorsLogging: false
     property bool perfMonitorsVisible: false
 
@@ -156,6 +155,7 @@ Rectangle {
 
     function init() {
         content.init()
+        console.log("filename: " + fileName);
         if (fileName != "")
             content.openVideo(fileName)
     }
