@@ -106,6 +106,7 @@ BorderImage {
             onClicked: {
                 openURL();
             }
+            isToggleable: true
         }
     }
 
@@ -116,6 +117,7 @@ BorderImage {
             //Toggle fullscreen
             toggleFullScreen();
         }
+        isToggleable: true
         anchors.right: controlBar.right
         anchors.top: controlBar.top
         anchors.rightMargin: 15
