@@ -16,6 +16,7 @@ Item {
     //Playback Controls
     ImageButton {
         id: rateReverseButton
+        enabled: isPlaybackEnabled
         imageSource: "images/RateButtonReverse.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.left: root.left
@@ -25,6 +26,7 @@ Item {
     }
     ImageButton {
         id: playButton
+        enabled: isPlaybackEnabled
         imageSource: !isPlaying ? "images/PlayButton.png" : "images/PauseButton.png"
         anchors.centerIn: root
         anchors.horizontalCenterOffset: 2
@@ -34,6 +36,7 @@ Item {
     }
     ImageButton {
         id: rateForwardButton
+        enabled: isPlaybackEnabled
         imageSource: "images/RateButtonForward.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.right: root.right

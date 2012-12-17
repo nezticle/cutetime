@@ -13,6 +13,7 @@ Item {
     property alias hover: mouseArea.containsMouse
     property alias pressed: mouseArea.pressed
 
+    opacity: enabled ? 1.0 : 0.5
     signal clicked
 
     width: image.width

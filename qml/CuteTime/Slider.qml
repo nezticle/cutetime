@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
 Item {
-    id: slider;
+    id: slider
+
     height: background.height
     // value is read/write.
     property real value: 1
@@ -41,8 +42,8 @@ Item {
             drag.axis: Drag.XAxis
             drag.minimumX: 0
             drag.maximumX: slider.xMax
-            onPressed: {
-                value = (maximum - minimum) * (handle.x) / slider.xMax + minimum;
+            onClicked: {
+                value = (maximum - minimum) * mouseX / slider.xMax + minimum;
                 valueChangedByHandle(value);
             }
             onPositionChanged: {
@@ -61,6 +62,7 @@ Item {
         anchors.rightMargin: 2
         border.left: 7
         border.right: 7
+        visible: slider.enabled
     }
 
     BorderImage {
@@ -69,6 +71,9 @@ Item {
         border.left: 7
         border.right: 7
         anchors.verticalCenter: background.verticalCenter
+        visible: slider.enabled
+        opacity: slider.mutable ? 1 : 0.5
+
         MouseArea {
             id: mouse
             enabled: slider.mutable

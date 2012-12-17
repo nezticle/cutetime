@@ -76,7 +76,7 @@ VideoOutput {
         }
 
         onStatusChanged: {
-            //console.debug("status = " + mediaPlayer.status);
+            console.debug("status = " + mediaPlayer.status);
             if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered)) {
                 //now that media is loaded, we should know its size, and should request a resize
                 //if we are not fullscreen, then the window should resize to the native size of the video
