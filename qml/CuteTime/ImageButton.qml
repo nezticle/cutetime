@@ -29,7 +29,7 @@ Item {
 //        samples: 24
 //        spread: 0
 //        fast: true
-//        color: "aqua"
+//        color: "white"
 //        source: image
 //    }
 
@@ -37,9 +37,8 @@ Item {
         id: glowEffect
         anchors.fill: image
         source: image
-        color: "aqua"
+        color: "white"
     }
-
 
     MouseArea {
         id: mouseArea

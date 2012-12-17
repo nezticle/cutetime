@@ -130,6 +130,8 @@ BorderImage {
         model: sources
         focus: true
 
+        currentIndex: 0
+
         onCurrentIndexChanged : {
             effectSource = model.get(currentIndex).source
             root.clicked()

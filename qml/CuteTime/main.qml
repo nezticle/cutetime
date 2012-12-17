@@ -123,6 +123,7 @@ Rectangle {
 
     ParameterPanel {
         id: parameterPanel
+        opacity: controlBar.opacity
         visible: effectSelectionPanel.visible && model.count !== 0
         height: effectSelectionPanel.height
         anchors {
@@ -135,7 +136,8 @@ Rectangle {
 
     EffectSelectionPanel {
         id: effectSelectionPanel
-        visible: false;
+        visible: false
+        opacity: controlBar.opacity
         anchors {
             bottom: controlBar.top
             right: controlBar.right
