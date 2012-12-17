@@ -88,7 +88,7 @@ BorderImage {
         ImageButton {
             id: fxButton
             imageSource: "images/FXButton.png"
-            isToggleable: true;
+            checkable: true
             onClicked: {
                 openFX();
             }
@@ -106,7 +106,6 @@ BorderImage {
             onClicked: {
                 openURL();
             }
-            isToggleable: true
         }
     }
 
@@ -117,7 +116,7 @@ BorderImage {
             //Toggle fullscreen
             toggleFullScreen();
         }
-        isToggleable: true
+        checkable: true
         anchors.right: controlBar.right
         anchors.top: controlBar.top
         anchors.rightMargin: 15

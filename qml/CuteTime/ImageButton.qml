@@ -8,10 +8,10 @@ Item {
     property alias enabled: mouseArea.enabled
     property alias imageSource: image.source
 
-    property bool isToggleable: false
-    property bool isChecked: false
-    property bool hover: mouseArea.containsMouse
-    property bool pressed: mouseArea.pressed
+    property bool checkable: false
+    property bool checked: false
+    property alias hover: mouseArea.containsMouse
+    property alias pressed: mouseArea.pressed
 
     signal clicked
 
@@ -28,8 +28,8 @@ Item {
         id: glowEffect
         anchors.fill: image
         source: image
-        color: "white"
-        visible: hover
+        color: pressed ? "#22000000" : checked ? "orange" : "white"
+        visible: checked || hover || pressed
     }
 
     MouseArea {
@@ -38,6 +38,8 @@ Item {
         anchors.fill: root
         onClicked: {
             root.clicked();
+            if (checkable)
+                checked = !checked
         }
     }
 }
