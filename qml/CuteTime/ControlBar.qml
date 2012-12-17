@@ -133,6 +133,7 @@ BorderImage {
         anchors.left: controlBar.left
         anchors.rightMargin: 15
         anchors.leftMargin: 15
+        enabled: playbackControl.isPlaybackEnabled
 
         duration: mediaPlayer.duration
 
@@ -149,7 +150,7 @@ BorderImage {
     Connections {
         target: mediaPlayer
         onPositionChanged: {
-            seekControl.position = mediaPlayer.position;
+            if (!seekControl.pressed) seekControl.position = mediaPlayer.position;
         }
         onStatusChanged: {
             if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered))
@@ -166,7 +167,7 @@ BorderImage {
         }
 
         onSeekableChanged: {
-            console.log("seekableChanged: " + mediaPlayer.seekable);
+            // console.log("seekableChanged: " + mediaPlayer.seekable);
             seekControl.seekable = mediaPlayer.seekable;
         }
     }

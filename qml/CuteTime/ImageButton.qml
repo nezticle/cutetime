@@ -37,6 +37,7 @@ Item {
         id: mouseArea
         hoverEnabled: true
         anchors.fill: root
+        onPositionChanged: applicationWindow.resetTimer()
         onClicked: {
             root.clicked();
             if (checkable)

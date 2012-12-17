@@ -42,10 +42,16 @@
 import QtQuick 2.0
 
 Rectangle {
-    id: root
+    id: applicationWindow
     width: 640
     height: 480
     color: "black"
+
+    signal resetTimer
+    onResetTimer: {
+        controlBar.show();
+        controlBarTimer.restart();
+    }
 
     Component.onCompleted: {
         init();
@@ -53,7 +59,7 @@ Rectangle {
 
     Content {
         id: content
-        anchors.fill: root
+        anchors.fill: parent
 
         onContentSizeChanged: {
             viewer.suggestResize(contentSize);
@@ -62,7 +68,7 @@ Rectangle {
 
     MouseArea {
         id: mouseActivityMonitor
-        anchors.fill: root
+        anchors.fill: parent
 
         hoverEnabled: true
         onPositionChanged: {
@@ -75,7 +81,7 @@ Rectangle {
         }
 
         onDoubleClicked: {
-            root.openVideo();
+            applicationWindow.openVideo();
         }
     }
 
@@ -91,21 +97,21 @@ Rectangle {
 
     ControlBar {
         id: controlBar
-        anchors.horizontalCenter: root.horizontalCenter
-        anchors.bottom: root.bottom
+        anchors.horizontalCenter: applicationWindow.horizontalCenter
+        anchors.bottom: applicationWindow.bottom
         anchors.bottomMargin: 50
         mediaPlayer: content.videoPlayer.mediaPlayer
 
         onOpenFile: {
-            root.openVideo();
+            applicationWindow.openVideo();
         }
 
         onOpenURL: {
-            root.openURL();
+            applicationWindow.openURL();
         }
 
         onOpenFX: {
-            root.openFX();
+            applicationWindow.openFX();
         }
 
         onToggleFullScreen: {

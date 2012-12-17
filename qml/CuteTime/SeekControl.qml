@@ -1,4 +1,3 @@
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 2.0
 
 Item {
@@ -7,6 +6,8 @@ Item {
     property int position: 0
     property int duration: 0
     property bool seekable: false
+    property alias pressed : seekSlider.pressed
+    property bool enabled
 
     signal seekValueChanged(int newPosition)
 
@@ -35,6 +36,7 @@ Item {
         anchors.right: remainingText.left
         anchors.verticalCenter: root.verticalCenter
         mutable: root.seekable
+        enabled: root.enabled
 
         minimum: 0.0
         maximum: root.duration !== 0 ? root.duration : 1

@@ -6,13 +6,14 @@ Item {
     height: background.height
     // value is read/write.
     property real value: 1
-    onValueChanged: if (!backgroundMouse.pressed) updatePos()
     property real maximum: 1
     property real minimum: 0
     property int xMax: width - handle.width
     onXMaxChanged: updatePos()
     onMinimumChanged: updatePos()
+    onValueChanged: if (!pressed) updatePos()
     property bool mutable: true
+    property alias pressed : backgroundMouse.pressed
 
     signal valueChangedByHandle(int newValue)
 
@@ -42,9 +43,10 @@ Item {
             drag.axis: Drag.XAxis
             drag.minimumX: 0
             drag.maximumX: slider.xMax
-            onClicked: {
+            onPressedChanged: {
                 value = (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum;
                 valueChangedByHandle(value);
+                updatePos();
             }
             onPositionChanged: {
                 value = (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum;
@@ -72,8 +74,6 @@ Item {
         anchors.verticalCenter: background.verticalCenter
         visible: slider.enabled
         opacity: slider.mutable ? backgroundMouse.pressed ? 1 : 0.8 : 0.5
-        Behavior on x { id: smoothing ; enabled: false; NumberAnimation{duration: 180} }
-        Component.onCompleted: smoothing.enabled = true // Ensure that values are initialized
     }
 }
 
