@@ -71,7 +71,7 @@ Rectangle {
         }
 
         onPressed: {
-            controlBar.hide();
+            hideToolBars();
         }
 
         onDoubleClicked: {
@@ -85,7 +85,7 @@ Rectangle {
         running: false
 
         onTriggered: {
-            controlBar.hide();
+            hideToolBars();
         }
     }
 
@@ -186,5 +186,10 @@ Rectangle {
     }
 
     function close() {
+    }
+
+    function hideToolBars() {
+        if (!controlBar.isMouseAbove && !parameterPanel.isMouseAbove && !effectSelectionPanel.isMouseAbove && content.videoPlayer.isPlaying)
+            controlBar.hide();
     }
 }

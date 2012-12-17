@@ -48,6 +48,7 @@ VideoOutput {
     fillMode: VideoOutput.PreserveAspectFit
     property alias mediaSource: mediaPlayer.source
     property alias mediaPlayer: mediaPlayer
+    property bool isPlaying: false
 
     MediaPlayer {
         id: mediaPlayer
@@ -60,6 +61,10 @@ VideoOutput {
 
         onPlaybackStateChanged: {
             //console.debug("playbackState = " + mediaPlayer.playbackState);
+            if (playbackState === MediaPlayer.PlayingState)
+                videoOutput.isPlaying = true;
+            else
+                videoOutput.isPlaying = false;
         }
 
         onAvailabilityChanged: {

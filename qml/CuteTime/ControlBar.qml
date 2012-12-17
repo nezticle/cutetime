@@ -171,8 +171,7 @@ BorderImage {
     }
 
     function hide() {
-        if(mediaPlayer.playbackRate !== 0 && !isMouseAbove)
-            controlBar.state = "HIDDEN";
+        controlBar.state = "HIDDEN";
     }
 
     function show() {

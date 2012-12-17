@@ -50,6 +50,7 @@ BorderImage {
     height: 78
     property int itemHeight: 25
     property string effectSource: ""
+    property bool isMouseAbove: false;
 
     signal clicked
     QtObject {
@@ -120,6 +121,14 @@ BorderImage {
                 }
             ]
         }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true;
+
+        onEntered: controlBar.isMouseAbove = true;
+        onExited: controlBar.isMouseAbove = false;
     }
 
     ListView {

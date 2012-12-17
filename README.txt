@@ -7,5 +7,6 @@ qtbase
 qtjsbackend
 qtdeclarative
 qtmultimedia
+qtgraphicaleffects
 
 Build the project using "qmake && make"
