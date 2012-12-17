@@ -116,7 +116,6 @@ Rectangle {
 
         onUrlAccepted: {
             urlBar.visible = false;
-            console.log("urlBar.text == " + text);
             if (text != "")
                 content.openVideo(text)
         }

@@ -96,10 +96,8 @@ void QtQuick2ApplicationViewer::suggestResize(const QSize &size)
 void QtQuick2ApplicationViewer::toggleFullscreen()
 {
     if (windowState() == Qt::WindowFullScreen) {
-        qDebug("toggleFullscreen normal");
         showNormal();
     } else {
-        qDebug("toggleFullscreen fullscreen");
         showFullScreen();
     }
 }

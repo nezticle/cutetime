@@ -68,7 +68,6 @@ QString adjustPath(const QString &path)
 
 QString FileReader::readFile(const QString &fileName)
 {
-    qWarning() << "FileReader::readFile" << "fileName" << fileName;
     QString content;
     QFile file(adjustPath(fileName));
     if (file.open(QIODevice::ReadOnly)) {

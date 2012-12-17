@@ -71,10 +71,6 @@ Rectangle {
         onSourceRectChanged: {
             contentSizeChanged(Qt.size(sourceRect.width, sourceRect.height));
         }
-
-        Component.onCompleted: {
-            console.log("mediaSource: " + mediaSource);
-        }
     }
 
     Loader {
