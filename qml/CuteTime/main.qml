@@ -69,6 +69,14 @@ Rectangle {
             controlBar.show();
             controlBarTimer.restart();
         }
+
+        onPressed: {
+            controlBar.hide();
+        }
+
+        onDoubleClicked: {
+            root.openVideo();
+        }
     }
 
     Timer {
