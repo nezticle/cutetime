@@ -47,15 +47,12 @@ VideoOutput {
     source: mediaPlayer
     fillMode: VideoOutput.PreserveAspectFit;
     property alias mediaSource: mediaPlayer.source
-    property alias volume: mediaPlayer.volume
-    property alias rate: mediaPlayer.playbackRate
     property alias mediaPlayer: mediaPlayer
 
     MediaPlayer {
         id: mediaPlayer
         autoLoad: true
         autoPlay: true
-        volume: 0.5
 
         onPlaybackRateChanged: {
             //console.debug("playbackRate: " + playbackRate);

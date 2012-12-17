@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
 
     QtQuick2ApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("fileName", fileName);
+    viewer.rootContext()->setContextProperty("startingVolume", volume);
     viewer.setMainQmlFile(QStringLiteral("qml/CuteTime/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     QQuickItem *rootObject = viewer.rootObject();
-    rootObject->setProperty("volume", volume);
 
     FileReader fileReader;
     viewer.rootContext()->setContextProperty("fileReader", &fileReader);

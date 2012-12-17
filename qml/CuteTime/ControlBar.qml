@@ -37,7 +37,8 @@ Image {
         anchors.left: controlBar.left
         anchors.leftMargin: 25
 
-        onVolumeChanged: {
+        Component.onCompleted: {
+            volumeControl.volume = startingVolume;
         }
     }
 
@@ -159,7 +160,6 @@ Image {
         target: mediaPlayer
         property: 'volume'
         value: volumeControl.volume
-        when: mediaPlayer !== null
     }
 
     function hide() {
