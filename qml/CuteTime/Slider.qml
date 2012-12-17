@@ -6,7 +6,7 @@ Item {
     height: background.height
     // value is read/write.
     property real value: 1
-    onValueChanged: updatePos()
+    onValueChanged: if (!backgroundMouse.pressed) updatePos()
     property real maximum: 1
     property real minimum: 0
     property int xMax: width - handle.width
@@ -47,7 +47,7 @@ Item {
                 valueChangedByHandle(value);
             }
             onPositionChanged: {
-                value = (maximum - minimum) * mouseX / slider.xMax + minimum;
+                value = (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum;
                 valueChangedByHandle(value);
             }
         }
@@ -71,24 +71,9 @@ Item {
         border.right: 7
         anchors.verticalCenter: background.verticalCenter
         visible: slider.enabled
-        opacity: slider.mutable ? mouse.containsMouse ? 1 : 0.8 : 0.5
+        opacity: slider.mutable ? backgroundMouse.pressed ? 1 : 0.8 : 0.5
         Behavior on x { id: smoothing ; enabled: false; NumberAnimation{duration: 180} }
         Component.onCompleted: smoothing.enabled = true // Ensure that values are initialized
-
-        MouseArea {
-            id: mouse
-            hoverEnabled: true
-            enabled: slider.mutable
-            anchors.fill: parent
-            drag.target: parent
-            drag.axis: Drag.XAxis
-            drag.minimumX: 0
-            drag.maximumX: slider.xMax
-            onPositionChanged: {
-                value = (maximum - minimum) * (handle.x) / slider.xMax + minimum;
-                valueChangedByHandle(value);
-            }
-        }
     }
 }
 
