@@ -81,7 +81,7 @@ Item {
                 width: 150
             }
 
-            SeekSlider {
+            Slider {
                 anchors {
                     top: parent.top
                     bottom: parent.bottom

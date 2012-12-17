@@ -7,7 +7,7 @@ Item {
     property real value: 1
     onValueChanged: updatePos();
     property real maximum: 1
-    property real minimum: 1
+    property real minimum: 0
     property int xMax: width - handle.width
     onXMaxChanged: updatePos();
     onMinimumChanged: updatePos();

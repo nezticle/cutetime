@@ -27,7 +27,7 @@ Item {
         color: "white"
     }
 
-    SeekSlider {
+    Slider {
         id: seekSlider
         anchors.leftMargin: 5
         anchors.rightMargin: 5

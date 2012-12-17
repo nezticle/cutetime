@@ -18,7 +18,7 @@ Item {
             root.volume = 0.0;
         }
     }
-    VolumeSlider {
+    Slider {
         id: volumeSlider
         anchors.left: volumeDown.right
         anchors.leftMargin: 3
