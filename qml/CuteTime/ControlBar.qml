@@ -6,7 +6,7 @@ Image {
     id: controlBar
     source: "images/ControlBar.png"
 
-    property QtObject mediaPlayer: null;
+    property MediaPlayer mediaPlayer: null;
     property bool isMouseAbove: false;
 
     signal openFile();
@@ -48,15 +48,26 @@ Image {
         anchors.top: controlBar.top
         anchors.topMargin: 10
 
-        onPlaybackRateChanged: {
-            //Try to update the playback rate on content item
-            console.debug("rate = " + playbackControl.playbackRate);
+        onPlayButtonPressed: {
+            if (isPlaying) {
+                mediaPlayer.pause();
+            } else {
+                mediaPlayer.play();
+            }
+        }
 
-            if (mediaPlayer !== null)
-                if (playbackRate === 1.0)
-                    mediaPlayer.play();
-                else if (playbackRate === 0.0)
-                    mediaPlayer.pause();
+        onReverseButtonPressed: {
+            if (mediaPlayer.seekable) {
+                //Subtract 10 seconds
+                mediaPlayer.seek(normalizeSeek(-10000));
+            }
+        }
+
+        onForwardButtonPressed: {
+            if (mediaPlayer.seekable) {
+                //Add 10 seconds
+                mediaPlayer.seek(normalizeSeek(10000));
+            }
         }
     }
 
@@ -129,6 +140,26 @@ Image {
         onPositionChanged: {
             seekControl.position = mediaPlayer.position;
         }
+        onStatusChanged: {
+            if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered))
+                playbackControl.isPlaybackEnabled = true;
+            else
+                playbackControl.isPlaybackEnabled = false;
+        }
+        onPlaybackStateChanged: {
+            if (mediaPlayer.playbackState === MediaPlayer.PlayingState) {
+                playbackControl.isPlaying = true;
+            } else {
+                playbackControl.isPlaying = false;
+            }
+        }
+    }
+
+    Binding {
+        target: mediaPlayer
+        property: 'volume'
+        value: volumeControl.volume
+        when: mediaPlayer !== null
     }
 
     function hide() {
@@ -140,24 +171,15 @@ Image {
         controlBar.state = "VISIBLE";
     }
 
-    Connections {
-        target: mediaPlayer
-        onStatusChanged: {
-            if ((mediaPlayer.status == MediaPlayer.Loaded) || (mediaPlayer.status == MediaPlayer.Buffered))
-                playbackControl.playbackEnabled = true;
-            else
-                playbackControl.playbackEnabled = false;
-        }
-    }
-
-    Binding {
-        target: mediaPlayer; property: 'volume'
-        value: volumeControl.volume; when: mediaPlayer !== null
-    }
-
-    Binding {
-        target: mediaPlayer; property: 'playbackRate'
-        value: playbackControl.playbackRate; when: mediaPlayer !== null
+    //Usage: give the value you wish to modify position,
+    //returns a value between 0 and duration
+    function normalizeSeek(value) {
+        var newPosition = mediaPlayer.position + value;
+        if (newPosition < 0)
+            newPosition = 0;
+        else if (newPosition > mediaPlayer.duration)
+            newPosition = mediaPlayer.duration;
+        return newPosition;
     }
 
     states: [
