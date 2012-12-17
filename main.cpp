@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
             }
         } else {
             if (fileName.isEmpty())
-                fileName = QUrl::fromLocalFile(arg);
+                fileName = QUrl(arg);
             else
                 qWarning() << "Argument" << arg << "ignored";
         }
