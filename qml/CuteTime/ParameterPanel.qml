@@ -78,13 +78,13 @@ Item {
                 font.pixelSize: 0.5 * parent.height
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
-                width: 150
+                width: 110
             }
 
             Slider {
                 anchors {
-                    top: parent.top
-                    bottom: parent.bottom
+                    verticalCenter: text.verticalCenter
+                    verticalCenterOffset: 3
                     left: text.right
                     leftMargin: 20
                     right: parent.right

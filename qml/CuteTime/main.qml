@@ -132,7 +132,7 @@ Rectangle {
 
     ParameterPanel {
         id: parameterPanel
-        visible: effectSelectionPanel.visible
+        visible: effectSelectionPanel.visible && model.count !== 0
         height: effectSelectionPanel.height
         anchors {
             left: controlBar.left
