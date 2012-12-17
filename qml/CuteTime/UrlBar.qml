@@ -6,6 +6,7 @@ Rectangle {
     signal urlAccepted(string text)
     color: "#cc222222"
     Behavior on opacity { NumberAnimation{} }
+    onOpacityChanged: if (opacity == 1) urlInput.forceActiveFocus();
 
     MouseArea {
         anchors.fill: parent
@@ -41,12 +42,15 @@ Rectangle {
 
             TextInput {
                 id: urlInput
+                clip: true
+                selectionColor: "#aaffffff"
+                selectedTextColor: "black"
+                selectByMouse: true
                 anchors.fill: parent
                 font.pointSize: 16
                 anchors.margins: 5
                 color: "black"
                 text: "http://"
-                focus: true
                 onAccepted: root.urlAccepted(urlInput.text);
             }
         }

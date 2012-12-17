@@ -7,11 +7,13 @@ Item {
 
     property alias enabled: mouseArea.enabled
     property alias imageSource: image.source
+
     property bool isToggleable: false
     property bool isChecked: false
+    property bool hover: mouseArea.containsMouse
+    property bool pressed: mouseArea.pressed
 
     signal clicked
-    state: "NORMAL"
 
     width: image.width
     height: 24
@@ -27,50 +29,15 @@ Item {
         anchors.fill: image
         source: image
         color: "white"
+        visible: hover
     }
 
     MouseArea {
         id: mouseArea
+        hoverEnabled: true
         anchors.fill: root
-        onPressed: {                
-            root.state = "HELD"
-        }
-
-        onReleased: {
-            if (isToggleable)
-                isChecked = !isChecked;
-            if (!isChecked || !isToggleable)
-                root.state = "NORMAL"
-        }
-
         onClicked: {
             root.clicked();
         }
     }
-
-    states: [
-        State {
-            name: "NORMAL"
-            PropertyChanges {
-                target: glowEffect
-                visible: false
-            }
-            PropertyChanges {
-                target: image
-                visible: true
-            }
-        },
-        State {
-            name: "HELD"
-            PropertyChanges {
-                target: image
-                visible: false
-            }
-            PropertyChanges {
-                target: glowEffect
-                visible: true
-            }
-        }
-    ]
-
 }
