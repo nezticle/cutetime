@@ -135,11 +135,14 @@ BorderImage {
         anchors.leftMargin: 15
 
         duration: mediaPlayer.duration
-        seekable: mediaPlayer.seekable
 
         onSeekValueChanged: {
             mediaPlayer.seek(newPosition);
             position = mediaPlayer.position;
+        }
+
+        Component.onCompleted: {
+            seekable = mediaPlayer.seekable;
         }
     }
 
@@ -160,6 +163,11 @@ BorderImage {
             } else {
                 playbackControl.isPlaying = false;
             }
+        }
+
+        onSeekableChanged: {
+            console.log("seekableChanged: " + mediaPlayer.seekable);
+            seekControl.seekable = mediaPlayer.seekable;
         }
     }
 
