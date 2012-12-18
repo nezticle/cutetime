@@ -138,12 +138,12 @@ FocusScope {
         visible: false
         opacity: controlBar.opacity
         anchors {
-            bottom: controlBar.top
-            right: controlBar.right
-            margins: 5
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+            margins: -10
         }
         width: 150
-        height: 150
         itemHeight: 40
         onEffectSourceChanged: {
             content.effectSource = effectSource

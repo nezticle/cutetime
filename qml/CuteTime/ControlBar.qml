@@ -89,7 +89,7 @@ BorderImage {
         anchors.left: playbackControl.right
         anchors.leftMargin: 30
         anchors.verticalCenter: playbackControl.verticalCenter
-        spacing: 4;
+        spacing: 16
 
         ImageButton {
             id: fxButton

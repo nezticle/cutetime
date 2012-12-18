@@ -3,7 +3,7 @@ import QtQuick 2.0
 
 Item {
     id: root
-    width: 100
+    width: 110
     height: volumeUp.height
 
     property alias volume: volumeSlider.value
@@ -21,7 +21,7 @@ Item {
     Slider {
         id: volumeSlider
         anchors.left: volumeDown.right
-        anchors.leftMargin: 3
+        anchors.leftMargin: 5
         anchors.rightMargin: 5
         anchors.right: volumeUp.left
         maximum: 1.0
