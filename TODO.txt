@@ -1,8 +1,8 @@
-- Make the Control Bar movable via dragging.
-    -this depends on the behavior of the FX dialog
-- Fix the File dialog to be asyncronous for stability on all platforms
-- AVFoundation doesn't report video source rect changes correctly on OS X 10.7+
-- Change color of seek progress to something move obvious (like blue)
-- Fix URL entry behavior to look nice
-    -There is a component to edit now
-- Add the Camera button when a camera device is available.
+- (Task) Add the Camera button when a camera device is available.
+- (Bug) Windows: opening a new file while movie is playing is 80% likely to cause a crash
+- (Bug) Sliders can be draged past their min/max values
+- (Bug) AVFoundation doesn't report video source rect changes correctly on OS X 10.7+
+- (Bug) When videos are opened on OS X, the window is sometimes resized, but the content is not until a geometry change on window
+- (Bug) Mouse hovering focus is broken, need to make sure all windows who register to listen to hover events get them.
+    - ControlBar and the FX panels should stay visible when mouse is hovered above them, but now if you hover over a button
+      (which also listens for hover events), the ControlBar will still get sent the hide signal.
