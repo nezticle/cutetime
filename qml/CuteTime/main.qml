@@ -81,7 +81,7 @@ Rectangle {
         }
 
         onDoubleClicked: {
-            applicationWindow.openVideo();
+            viewer.toggleFullscreen();
         }
     }
 
