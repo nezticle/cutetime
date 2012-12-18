@@ -47,16 +47,14 @@ Item {
     property color lineColor: "black"
     property real spacing: 10
     property real sliderHeight: 40
-    property bool isMouseAbove: false;
+    property bool isMouseAbove: mouseAboveMonitor.containsMouse
 
     property ListModel model: ListModel { }
 
     MouseArea {
+        id: mouseAboveMonitor
         anchors.fill: parent
         hoverEnabled: true;
-
-        onEntered: controlBar.isMouseAbove = true;
-        onExited: controlBar.isMouseAbove = false;
     }
 
     BorderImage {

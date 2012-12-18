@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
     QtQuick2ApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("fileName", fileName);
     viewer.rootContext()->setContextProperty("startingVolume", volume);
+    viewer.rootContext()->setContextProperty("viewer", &viewer);
     viewer.setMainQmlFile(QStringLiteral("qml/CuteTime/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
-    QQuickItem *rootObject = viewer.rootObject();
 
     FileReader fileReader;
     viewer.rootContext()->setContextProperty("fileReader", &fileReader);
@@ -55,7 +55,6 @@ int main(int argc, char *argv[])
     if (!moviesLocation.isEmpty())
         videoPath = moviesLocation.first();
     viewer.rootContext()->setContextProperty("videoPath", videoPath);
-    viewer.rootContext()->setContextProperty("viewer", &viewer);
 
     viewer.setTitle("CuteTime");
 

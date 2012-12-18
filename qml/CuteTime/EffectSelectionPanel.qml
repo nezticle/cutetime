@@ -50,7 +50,7 @@ BorderImage {
     height: 78
     property int itemHeight: 25
     property string effectSource: ""
-    property bool isMouseAbove: false;
+    property bool isMouseAbove: mouseAboveMonitor.containsMouse
 
     Keys.onEscapePressed: visible = false
 
@@ -126,11 +126,9 @@ BorderImage {
     }
 
     MouseArea {
+        id: mouseAboveMonitor
         anchors.fill: parent
-        hoverEnabled: true;
-
-        onEntered: controlBar.isMouseAbove = true;
-        onExited: controlBar.isMouseAbove = false;
+        hoverEnabled: true
     }
 
     ListView {
