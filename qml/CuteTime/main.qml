@@ -40,12 +40,13 @@
 ****************************************************************************/
 
 import QtQuick 2.0
+import QtMultimedia 5.0
 
-Rectangle {
+FocusScope {
     id: applicationWindow
     width: 640
     height: 480
-    color: "black"
+    focus: true
 
     MouseArea {
         id: mouseActivityMonitor
@@ -162,6 +163,65 @@ Rectangle {
         }
     }
 
+    property real volumeBeforeMuted: 1.0
+    property bool isFullScreen: false
+    Connections {
+        target: viewer
+        onWindowStateChanged: applicationWindow.isFullScreen = (windowState & Qt.WindowFullScreen)
+    }
+
+    Keys.onPressed: {
+        if (event.key === Qt.Key_O && event.modifiers & Qt.ControlModifier) {
+            openVideo();
+            return;
+        } else if (event.key === Qt.Key_N && event.modifiers & Qt.ControlModifier) {
+            openURL();
+            return;
+        } else if (event.key === Qt.Key_E && event.modifiers & Qt.ControlModifier) {
+            openFX();
+            return;
+        } else if (event.key === Qt.Key_F && event.modifiers & Qt.ControlModifier) {
+            viewer.toggleFullscreen();
+            return;
+        } else if (event.key === Qt.Key_Up) {
+            content.videoPlayer.mediaPlayer.volume = Math.min(1, content.videoPlayer.mediaPlayer.volume + 0.1);
+            return;
+        } else if (event.key === Qt.Key_Down) {
+            if (event.modifiers & Qt.ControlModifier) {
+                if (content.videoPlayer.mediaPlayer.volume) {
+                    volumeBeforeMuted = content.videoPlayer.mediaPlayer.volume;
+                    content.videoPlayer.mediaPlayer.volume = 0
+                } else {
+                    content.videoPlayer.mediaPlayer.volume = volumeBeforeMuted;
+                }
+            } else {
+                content.videoPlayer.mediaPlayer.volume = Math.max(0, content.videoPlayer.mediaPlayer.volume - 0.1);
+            }
+            return;
+        } else if (applicationWindow.isFullScreen && event.key === Qt.Key_Escape) {
+            viewer.toggleFullscreen();
+            return;
+        }
+
+        // What's next should be handled only if there's a loaded media
+        if (content.videoPlayer.mediaPlayer.status !== MediaPlayer.Loaded
+                && content.videoPlayer.mediaPlayer.status !== MediaPlayer.Buffered)
+            return;
+
+        if (event.key === Qt.Key_Space) {
+            if (content.videoPlayer.mediaPlayer.playbackState === MediaPlayer.PlayingState)
+                content.videoPlayer.mediaPlayer.pause()
+            else if (content.videoPlayer.mediaPlayer.playbackState === MediaPlayer.PausedState
+                     || content.videoPlayer.mediaPlayer.playbackState === MediaPlayer.StoppedState)
+                content.videoPlayer.mediaPlayer.play()
+        } else if (event.key === Qt.Key_Left) {
+            content.videoPlayer.mediaPlayer.seek(Math.max(0, content.videoPlayer.mediaPlayer.position - 30000));
+            return;
+        } else if (event.key === Qt.Key_Right) {
+            content.videoPlayer.mediaPlayer.seek(Math.min(content.videoPlayer.mediaPlayer.duration, content.videoPlayer.mediaPlayer.position + 30000));
+            return;
+        }
+    }
 
     function init() {
         content.init()

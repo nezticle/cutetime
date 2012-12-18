@@ -1,4 +1,4 @@
-/****************************************************************************
+ /****************************************************************************
 **
 ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
@@ -41,12 +41,14 @@
 
 import QtQuick 2.0
 
-Item {
+Rectangle {
     id: root
     property alias effect: effectLoader.item
     property string effectSource
     property alias videoPlayer: videoContent
     signal contentSizeChanged(size contentSize)
+
+    color: "black"
 
     ShaderEffectSource {
         id: theSource

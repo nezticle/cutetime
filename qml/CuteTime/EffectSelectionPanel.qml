@@ -52,6 +52,8 @@ BorderImage {
     property string effectSource: ""
     property bool isMouseAbove: false;
 
+    Keys.onEscapePressed: visible = false
+
     signal clicked
     QtObject {
         id: d
@@ -137,7 +139,7 @@ BorderImage {
         clip: true
         anchors.margins: 14
         model: sources
-        focus: true
+        focus: root.visible && root.opacity && urlBar.opacity === 0
 
         currentIndex: 0
 

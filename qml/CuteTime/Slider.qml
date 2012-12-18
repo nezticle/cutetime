@@ -44,12 +44,12 @@ Item {
             drag.minimumX: 0
             drag.maximumX: slider.xMax
             onPressedChanged: {
-                value = (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum;
+                value = Math.max(minimum, Math.min(maximum, (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum));
                 valueChangedByHandle(value);
                 updatePos();
             }
             onPositionChanged: {
-                value = (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum;
+                value = Math.max(minimum, Math.min(maximum, (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum));
                 valueChangedByHandle(value);
             }
         }

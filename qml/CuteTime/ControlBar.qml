@@ -41,9 +41,15 @@ BorderImage {
         anchors.verticalCenter: playbackControl.verticalCenter
         anchors.left: controlBar.left
         anchors.leftMargin: 25
+        onVolumeChanged: mediaPlayer.volume = volume
 
         Component.onCompleted: {
             volumeControl.volume = startingVolume;
+        }
+
+        Connections {
+            target: mediaPlayer
+            onVolumeChanged: volumeControl.volume = mediaPlayer.volume
         }
     }
 
@@ -89,6 +95,7 @@ BorderImage {
             id: fxButton
             imageSource: "images/FXButton.png"
             checkable: true
+            checked: effectSelectionPanel.visible
             onClicked: {
                 openFX();
             }
@@ -117,11 +124,11 @@ BorderImage {
             toggleFullScreen();
         }
         checkable: true
+        checked: applicationWindow.isFullScreen
         anchors.right: controlBar.right
         anchors.top: controlBar.top
         anchors.rightMargin: 15
         anchors.topMargin: 15
-
     }
 
     //Seek controls
@@ -170,12 +177,6 @@ BorderImage {
             // console.log("seekableChanged: " + mediaPlayer.seekable);
             seekControl.seekable = mediaPlayer.seekable;
         }
-    }
-
-    Binding {
-        target: mediaPlayer
-        property: 'volume'
-        value: volumeControl.volume
     }
 
     function hide() {

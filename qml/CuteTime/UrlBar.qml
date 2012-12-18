@@ -6,7 +6,14 @@ Rectangle {
     signal urlAccepted(string text)
     color: "#cc222222"
     Behavior on opacity { NumberAnimation{} }
-    onOpacityChanged: if (opacity == 1) urlInput.forceActiveFocus();
+    onOpacityChanged: {
+        if (opacity == 1)
+            urlInput.focus = true
+        else if (opacity == 0)
+            urlInput.focus = false
+    }
+
+    Keys.onEscapePressed: root.opacity = 0
 
     MouseArea {
         anchors.fill: parent
