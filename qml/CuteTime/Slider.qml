@@ -58,6 +58,10 @@ Item {
     BorderImage {
         id: progress
         source: "images/SliderProgress.png"
+        anchors.topMargin: 1
+        anchors.top: parent.top
+        anchors.bottomMargin: 2
+        anchors.bottom: parent.bottom
         anchors.left: background.left
         anchors.right: handle.right
         anchors.rightMargin: 2
