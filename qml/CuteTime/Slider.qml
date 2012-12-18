@@ -52,6 +52,11 @@ Item {
                 value = Math.max(minimum, Math.min(maximum, (maximum - minimum) * (mouseX - handle.width/2) / slider.xMax + minimum));
                 valueChangedByHandle(value);
             }
+            onWheel: {
+                value = Math.max(minimum, Math.min(maximum, value + (wheel.angleDelta.y > 0 ? 1 : -1) * (10 / slider.xMax) * (slider.maximum - slider.minimum)));
+                valueChangedByHandle(value);
+                updatePos();
+            }
         }
     }
 
