@@ -57,7 +57,7 @@ Item {
     Intro {
         id: introBackground
         anchors.fill: root
-        visible: videoContent.mediaSource == "" ? true : false
+        visible: videoContent.mediaSource == "" ? true : false        
     }
 
     ContentVideo {

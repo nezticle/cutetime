@@ -47,25 +47,6 @@ Rectangle {
     height: 480
     color: "black"
 
-    signal resetTimer
-    onResetTimer: {
-        controlBar.show();
-        controlBarTimer.restart();
-    }
-
-    Component.onCompleted: {
-        init();
-    }
-
-    Content {
-        id: content
-        anchors.fill: parent
-
-        onContentSizeChanged: {
-            viewer.suggestResize(contentSize);
-        }
-    }
-
     MouseArea {
         id: mouseActivityMonitor
         anchors.fill: parent
@@ -82,6 +63,25 @@ Rectangle {
 
         onDoubleClicked: {
             viewer.toggleFullscreen();
+        }
+    }
+
+    signal resetTimer
+    onResetTimer: {
+        controlBar.show();
+        controlBarTimer.restart();
+    }
+
+    Component.onCompleted: {
+        init();
+    }
+
+    Content {
+        id: content
+        anchors.fill: parent
+
+        onContentSizeChanged: {
+            viewer.suggestResize(contentSize);
         }
     }
 
