@@ -124,12 +124,11 @@ FocusScope {
         id: parameterPanel
         opacity: controlBar.opacity
         visible: effectSelectionPanel.visible && model.count !== 0
-        height: effectSelectionPanel.height
+        height: 100
         anchors {
             left: controlBar.left
             bottom: controlBar.top
             right: effectSelectionPanel.left
-            margins: 5
         }
     }
 
@@ -138,12 +137,11 @@ FocusScope {
         visible: false
         opacity: controlBar.opacity
         anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-            margins: -10
+            bottom: controlBar.top
+            right: controlBar.right
         }
         width: 150
+        height: 200
         itemHeight: 40
         onEffectSourceChanged: {
             content.effectSource = effectSource
