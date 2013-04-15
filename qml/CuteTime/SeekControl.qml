@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Item {
     id: root
+    height: seekSlider.height
 
     property int position: 0
     property int duration: 0
@@ -22,16 +23,17 @@ Item {
 
     Text {
         id: elapsedText
-        anchors.verticalCenter: root.verticalCenter
+        anchors.verticalCenter: seekSlider.verticalCenter
         anchors.left: root.left
-        text: "00:00:00"
-        color: "white"
+        text: "00:00"
+        font.pixelSize: 20
+        color: "#cccccc"
     }
 
     Slider {
         id: seekSlider
-        anchors.leftMargin: 5
-        anchors.rightMargin: 5
+        anchors.leftMargin: 30
+        anchors.rightMargin: 30
         anchors.left: elapsedText.right
         anchors.right: remainingText.left
         anchors.verticalCenter: root.verticalCenter
@@ -43,15 +45,17 @@ Item {
 
         onValueChangedByHandle: {
             seekValueChanged(newValue);
+            applicationWindow.resetTimer()
         }
     }
 
     Text {
         id: remainingText
-        anchors.verticalCenter: root.verticalCenter
+        anchors.verticalCenter: seekSlider.verticalCenter
         anchors.right: root.right
-        text: "00:00:00"
-        color: "white"
+        text: "00:00"
+        font.pixelSize: 20
+        color: "#cccccc"
     }
 
     function formatTime(time) {
@@ -61,7 +65,10 @@ Item {
         var minutes = Math.floor(time / 60);
         var seconds = Math.floor(time - minutes * 60);
 
-        return formatTimeBlock(hours) + ":" + formatTimeBlock(minutes) + ":" + formatTimeBlock(seconds);
+        if (hours > 0)
+            return formatTimeBlock(hours) + ":" + formatTimeBlock(minutes) + ":" + formatTimeBlock(seconds);
+        else
+            return formatTimeBlock(minutes) + ":" + formatTimeBlock(seconds);
 
     }
 

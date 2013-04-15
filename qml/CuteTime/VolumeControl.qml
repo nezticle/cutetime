@@ -3,7 +3,7 @@ import QtQuick 2.0
 
 Item {
     id: root
-    width: 110
+    width: 210
     height: volumeUp.height
 
     property alias volume: volumeSlider.value
@@ -14,6 +14,7 @@ Item {
         imageSource: "images/VolumeDown.png"
         anchors.verticalCenter: root.verticalCenter
         anchors.left: root.left
+        scale: 1.4
         onClicked: {
             root.volume = 0.0;
         }
@@ -21,8 +22,8 @@ Item {
     Slider {
         id: volumeSlider
         anchors.left: volumeDown.right
-        anchors.leftMargin: 5
-        anchors.rightMargin: 5
+        anchors.leftMargin: 22
+        anchors.rightMargin: 22
         anchors.right: volumeUp.left
         maximum: 1.0
         minimum: 0.0
@@ -36,6 +37,7 @@ Item {
         anchors.verticalCenter: root.verticalCenter
         anchors.verticalCenterOffset: 1
         anchors.right: root.right
+        scale: 1.4
         onClicked: {
             root.volume = 1.0
         }

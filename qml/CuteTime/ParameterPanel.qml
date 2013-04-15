@@ -41,12 +41,13 @@
 
 import QtQuick 2.0
 
-Item {
+Rectangle {
     id: root
     height: view.model.count * sliderHeight
+    color: "#BB333333"
     property color lineColor: "black"
     property real spacing: 10
-    property real sliderHeight: 40
+    property real sliderHeight: 50
     property bool isMouseAbove: mouseAboveMonitor.containsMouse
 
     property ListModel model: ListModel { }
@@ -55,15 +56,6 @@ Item {
         id: mouseAboveMonitor
         anchors.fill: parent
         hoverEnabled: true;
-    }
-
-    BorderImage {
-        source: "images/ControlBar.png"
-        anchors.fill: parent
-        border.top: 12
-        border.bottom: 12
-        border.left: 12
-        border.right: 12
     }
 
     Component {
@@ -82,11 +74,14 @@ Item {
                 anchors {
                     top: parent.top
                     bottom: parent.bottom
+                    leftMargin: 15
                     left: parent.left
                 }
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
-                width: 110
+                font.pixelSize: 20
+                font.capitalization: Font.Capitalize
+                width: 90
             }
 
             Slider {

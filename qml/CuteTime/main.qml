@@ -53,17 +53,21 @@ FocusScope {
         anchors.fill: parent
 
         hoverEnabled: true
-        onPositionChanged: {
-            controlBar.show();
-            controlBarTimer.restart();
+        onClicked: {
+            if (controlBar.state === "VISIBLE" && content.videoPlayer.mediaPlayer.status === MediaPlayer.Loaded) {
+                controlBar.hide();
+            } else {
+                controlBar.show();
+                controlBarTimer.restart();
+            }
         }
 
-        onPressed: {
-            hideToolBars();
-        }
+//        onPressed: {
+//            hideToolBars();
+//        }
 
         onDoubleClicked: {
-            viewer.toggleFullscreen();
+//            viewer.toggleFullscreen();
         }
     }
 
@@ -88,7 +92,7 @@ FocusScope {
 
     Timer {
         id: controlBarTimer
-        interval: 1000
+        interval: 4000
         running: false
 
         onTriggered: {
@@ -98,9 +102,9 @@ FocusScope {
 
     ControlBar {
         id: controlBar
-        anchors.horizontalCenter: applicationWindow.horizontalCenter
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.bottom: applicationWindow.bottom
-        anchors.bottomMargin: 50
         mediaPlayer: content.videoPlayer.mediaPlayer
 
         onOpenFile: {
@@ -124,11 +128,13 @@ FocusScope {
         id: parameterPanel
         opacity: controlBar.opacity
         visible: effectSelectionPanel.visible && model.count !== 0
-        height: 100
+        height: 116
+        width: 500
         anchors {
-            left: controlBar.left
+            bottomMargin: 15
             bottom: controlBar.top
             right: effectSelectionPanel.left
+            rightMargin: 15
         }
     }
 
@@ -139,10 +145,12 @@ FocusScope {
         anchors {
             bottom: controlBar.top
             right: controlBar.right
+//            rightMargin: 15
+            bottomMargin: 15
         }
-        width: 150
-        height: 200
-        itemHeight: 40
+        width: 250
+        height: 350
+        itemHeight: 80
         onEffectSourceChanged: {
             content.effectSource = effectSource
             parameterPanel.model = content.effect.parameters
@@ -161,6 +169,40 @@ FocusScope {
         }
     }
 
+    Rectangle {
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.rightMargin: 32
+        anchors.topMargin: 32
+        width: 40
+        height: 40
+        radius: width / 2
+        color: infoMouser.pressed ? "#BB999999" : "#88444444"
+        antialiasing: true
+        visible: content.videoPlayer.mediaPlayer.status !== MediaPlayer.NoMedia && controlBar.state === "VISIBLE"
+
+        Text {
+            anchors.centerIn: parent
+            text: "i"
+            font.italic: true
+            font.bold: true
+            color: "white"
+            font.pixelSize: 28
+        }
+
+        MouseArea {
+            id: infoMouser
+            anchors.fill: parent
+            anchors.margins: -10
+            onClicked: metadataView.opacity = 1
+        }
+    }
+
+    MetadataView {
+        id: metadataView
+        mediaPlayer: content.videoPlayer.mediaPlayer
+    }
+
     property real volumeBeforeMuted: 1.0
     property bool isFullScreen: false
     Connections {
@@ -168,7 +210,17 @@ FocusScope {
         onWindowStateChanged: applicationWindow.isFullScreen = (windowState & Qt.WindowFullScreen)
     }
 
+    FileBrowser {
+        id: fileBrowser
+        anchors.fill: parent
+        onFileSelected: {
+            if (file != "")
+                content.openVideo(file);
+        }
+    }
+
     Keys.onPressed: {
+        applicationWindow.resetTimer();
         if (event.key === Qt.Key_O && event.modifiers & Qt.ControlModifier) {
             openVideo();
             return;
@@ -181,10 +233,10 @@ FocusScope {
         } else if (event.key === Qt.Key_F && event.modifiers & Qt.ControlModifier) {
             viewer.toggleFullscreen();
             return;
-        } else if (event.key === Qt.Key_Up) {
+        } else if (event.key === Qt.Key_Up || event.key === Qt.Key_VolumeUp) {
             content.videoPlayer.mediaPlayer.volume = Math.min(1, content.videoPlayer.mediaPlayer.volume + 0.1);
             return;
-        } else if (event.key === Qt.Key_Down) {
+        } else if (event.key === Qt.Key_Down || event.key === Qt.Key_VolumeDown) {
             if (event.modifiers & Qt.ControlModifier) {
                 if (content.videoPlayer.mediaPlayer.volume) {
                     volumeBeforeMuted = content.videoPlayer.mediaPlayer.volume;
@@ -229,9 +281,10 @@ FocusScope {
 
     function openVideo() {
         //videoFileBrowser.show()
-        var videoFile = viewer.openFileDialog();
-        if (videoFile != "")
-            content.openVideo(videoFile);
+//        var videoFile = viewer.openFileDialog();
+//        if (videoFile != "")
+//            content.openVideo(videoFile);
+        fileBrowser.show()
     }
 
     function openCamera() {

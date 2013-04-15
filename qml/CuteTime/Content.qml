@@ -40,6 +40,7 @@
 ****************************************************************************/
 
 import QtQuick 2.0
+import QtMultimedia 5.0
 
 Rectangle {
     id: root
@@ -59,7 +60,7 @@ Rectangle {
     Intro {
         id: introBackground
         anchors.fill: root
-        visible: videoContent.mediaSource == "" ? true : false        
+        visible: videoContent.mediaSource == "" ? true : false
     }
 
     ContentVideo {

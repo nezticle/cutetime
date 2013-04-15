@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     viewer.rootContext()->setContextProperty("fileName", fileName);
     viewer.rootContext()->setContextProperty("startingVolume", volume);
     viewer.rootContext()->setContextProperty("viewer", &viewer);
-    viewer.setMainQmlFile(QStringLiteral("qml/CuteTime/main.qml"));
+    viewer.setSource(QUrl(QStringLiteral("qrc:/qml/CuteTime/main.qml")));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
 
     FileReader fileReader;

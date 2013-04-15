@@ -26,6 +26,7 @@ Rectangle {
         anchors.bottomMargin: 8
         text: "Enter URL"
         color: "white"
+        font.pixelSize: 20
     }
 
     BorderImage {
@@ -35,9 +36,10 @@ Rectangle {
         border.bottom: 12
         border.left: 12
         border.right: 12
-        height: 58
+        height: 70
         anchors.centerIn: parent
-        width: controlBar.width
+        anchors.verticalCenterOffset: -170
+        width: 600
 
         Rectangle {
             anchors.fill: parent
@@ -49,17 +51,30 @@ Rectangle {
 
             TextInput {
                 id: urlInput
-                clip: true
                 selectionColor: "#aaffffff"
                 selectedTextColor: "black"
                 selectByMouse: true
                 anchors.fill: parent
-                font.pointSize: 16
                 anchors.margins: 5
+                font.pixelSize: 24
                 color: "black"
                 text: "http://"
                 onAccepted: root.urlAccepted(urlInput.text);
+
             }
         }
     }
+
+//    Rectangle {
+//        anchors.right: urlBar.left
+//        anchors.rightMargin: 32
+//        anchors.verticalCenter: urlBar.verticalCenter
+//        height: 70
+//        width: 70
+//        color: "gray"
+//        MouseArea {
+//            anchors.fill: parent
+//            onClicked: { urlInput.text = ""; urlInput.paste(); }
+//        }
+//    }
 }

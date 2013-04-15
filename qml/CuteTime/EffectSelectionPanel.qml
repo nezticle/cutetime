@@ -40,13 +40,9 @@
 ****************************************************************************/
 import QtQuick 2.0
 
-BorderImage {
+Rectangle {
     id: root
-    source: "images/ControlBar.png"
-    border.top: 12
-    border.bottom: 12
-    border.left: 12
-    border.right: 12
+    color: "#BB333333"
     height: 78
     property int itemHeight: 25
     property string effectSource: ""
@@ -71,14 +67,14 @@ BorderImage {
         ListElement { name: "Glow"; source: "Effects/EffectGlow.qml" }
         ListElement { name: "Isolate"; source: "Effects/EffectIsolate.qml" }
         //ListElement { name: "Magnify"; source: "Effects/EffectMagnify.qml" }
-        ListElement { name: "Page curl"; source: "Effects/EffectPageCurl.qml" }
+//        ListElement { name: "Page curl"; source: "Effects/EffectPageCurl.qml" }
         ListElement { name: "Pixelate"; source: "Effects/EffectPixelate.qml" }
         ListElement { name: "Posterize"; source: "Effects/EffectPosterize.qml" }
         ListElement { name: "Ripple"; source: "Effects/EffectRipple.qml" }
         ListElement { name: "Sepia"; source: "Effects/EffectSepia.qml" }
         ListElement { name: "Sharpen"; source: "Effects/EffectSharpen.qml" }
         ListElement { name: "Shockwave"; source: "Effects/EffectShockwave.qml" }
-        ListElement { name: "Tilt shift"; source: "Effects/EffectTiltShift.qml" }
+//        ListElement { name: "Tilt shift"; source: "Effects/EffectTiltShift.qml" }
         ListElement { name: "Toon"; source: "Effects/EffectToon.qml" }
         ListElement { name: "Warhol"; source: "Effects/EffectWarhol.qml" }
         ListElement { name: "Wobble"; source: "Effects/EffectWobble.qml" }
@@ -144,21 +140,22 @@ BorderImage {
         onCurrentIndexChanged : {
             effectSource = model.get(currentIndex).source
             root.clicked()
+            applicationWindow.resetTimer()
         }
 
         delegate: Item {
-            height: 24
+            height: 40
             width: parent.width
             Rectangle {
                 anchors.fill: parent
                 border.color: index == list.currentIndex ? "#44ffffff" : "transparent"
                 color: index == list.currentIndex ? "#22ffffff" : "transparent"
                 radius: 3
-                Text { color: "white" ; text: name ; anchors.centerIn: parent}
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked:  list.currentIndex = index
+                Text { color: "white" ; text: name ; anchors.centerIn: parent; font.pixelSize: 20  }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked:  list.currentIndex = index
+                }
             }
         }
     }

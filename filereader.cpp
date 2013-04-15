@@ -69,7 +69,7 @@ QString adjustPath(const QString &path)
 QString FileReader::readFile(const QString &fileName)
 {
     QString content;
-    QFile file(adjustPath(fileName));
+    QFile file(QString(QStringLiteral(":/%1")).arg(fileName));
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream stream(&file);
         content = stream.readAll();

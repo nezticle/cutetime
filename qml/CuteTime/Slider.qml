@@ -3,9 +3,9 @@ import QtQuick 2.0
 Item {
     id: slider
 
-    height: background.height
+    height: handleBack.height
     // value is read/write.
-    property real value: 1
+    property real value: 0
     property real maximum: 1
     property real minimum: 0
     property int xMax: width - handle.width
@@ -28,16 +28,18 @@ Item {
         }
     }
 
-    BorderImage {
+    Rectangle {
         id: background
-        source: "images/SliderBackground.png"
         width: slider.width
-        border.left: 6
-        border.right: 6
+        anchors.verticalCenter: slider.verticalCenter
+        height: 2
+        color: "#666666"
 
         MouseArea {
             id: backgroundMouse
             anchors.fill: parent
+            anchors.topMargin: -24
+            anchors.bottomMargin: -24
             enabled: slider.mutable
             drag.target: handle
             drag.axis: Drag.XAxis
@@ -60,29 +62,37 @@ Item {
         }
     }
 
-    BorderImage {
+    Rectangle {
         id: progress
-        source: "images/SliderProgress.png"
-        anchors.topMargin: 1
-        anchors.top: parent.top
-        anchors.bottomMargin: 2
-        anchors.bottom: parent.bottom
+        height: 5
+        anchors.verticalCenter: background.verticalCenter
         anchors.left: background.left
         anchors.right: handle.right
-        anchors.rightMargin: 2
-        border.left: 7
-        border.right: 7
+        anchors.rightMargin: handle.width / 2
         visible: slider.enabled
+        color: "#98c66c"
     }
 
-    BorderImage {
+    Rectangle {
+        id: handleBack
+        width: 40
+        height: width
+        radius: width / 2
+        color: "#8898c66c"
+        antialiasing: true
+        anchors.centerIn: handle
+        visible: handle.visible
+    }
+
+    Rectangle {
         id: handle
-        source: "images/SliderHandle.png"
-        border.left: 7
-        border.right: 7
+        width: 14
+        height: width
+        radius: width / 2
+        antialiasing: true
+        color: "#98c66c"
         anchors.verticalCenter: background.verticalCenter
         visible: slider.enabled
-        opacity: slider.mutable ? backgroundMouse.pressed ? 1 : 0.8 : 0.5
     }
 }
 
